@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Executive — Movie Industry Tycoon</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#FBF4E4;
+  --paper-2:#F4E8CE;
+  --ink:#33283B;
+  --ink-soft:#8B7B84;
+  --line:#E7D7B7;
+  --line-2:#D8C39A;
+  --teal:#15827A;
+  --teal-d:#0C5A53;
+  --gold:#E0A32E;
+  --gold-d:#B67F16;
+  --red:#C0453B;
+  --green:#2E8B57;
+  /* legacy variable names remapped to the cinema palette so existing markup recolors automatically */
+  --color-background-primary:#FFFDF6;
+  --color-background-secondary:#F4E9D2;
+  --color-border-tertiary:#ECE0C7;
+  --color-border-secondary:#DBCBA6;
+  --color-text-primary:#33283B;
+  --color-text-secondary:#8B7B84;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:var(--ink);min-height:100vh;
+  background:radial-gradient(130% 120% at 50% -10%,#1d4a45 0%,#153733 40%,#0e2725 100%) fixed;padding:18px 14px}
+#app{max-width:920px;margin:0 auto;background:var(--paper);border-radius:22px;overflow:hidden;
+  box-shadow:0 40px 80px -30px rgba(0,0,0,.7),0 0 0 1px rgba(0,0,0,.05),inset 0 1px 0 rgba(255,255,255,.6);min-height:calc(100vh - 36px)}
+.hide{display:none!important}
+.card{background:linear-gradient(180deg,#FFFDF7,#FBF3E2);border:1px solid var(--line);border-radius:15px;padding:14px 16px;margin-bottom:12px;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 8px 18px -12px rgba(70,45,10,.35)}
+.card-title{font-family:'Fredoka',sans-serif;font-size:12px;font-weight:600;color:var(--teal-d);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.card-title::before{content:"";width:14px;height:3px;border-radius:99px;background:var(--gold)}
+.btn{padding:8px 15px;font-size:12px;font-weight:600;border:1px solid var(--line-2);border-radius:11px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;color:var(--ink);
+  background:linear-gradient(180deg,#FFFDF6,#F3E7CE);box-shadow:0 2px 0 rgba(150,120,40,.18),0 5px 12px -6px rgba(90,65,20,.35);transition:transform .08s,filter .12s}
+.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}.btn:active{transform:translateY(0);box-shadow:0 1px 0 rgba(150,120,40,.18)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;filter:none}
+.btn-p{background:linear-gradient(180deg,#1C9A8E,#116159)!important;color:#EAFBF6!important;border-color:#0C4A44!important;box-shadow:0 2px 0 #0b4b45,0 7px 16px -7px rgba(10,90,80,.7)!important}
+.btn-g{background:linear-gradient(180deg,#43B573,#2C8250)!important;color:#F0FBF3!important;border-color:#256B43!important;box-shadow:0 2px 0 #22623d,0 7px 16px -7px rgba(20,110,60,.55)!important}
+.btn-r{background:linear-gradient(180deg,#D45F53,#A6382F)!important;color:#FCEEEC!important;border-color:#8C2C24!important;box-shadow:0 2px 0 #872a22,0 7px 16px -7px rgba(140,40,30,.5)!important}
+.btn-sm{padding:5px 10px;font-size:11px;border-radius:9px}
+.pill{display:inline-block;padding:3px 9px;border-radius:99px;font-size:10px;font-weight:600;letter-spacing:.01em}
+.row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:none}
+.irow{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px}
+.irow:last-child{border:none}
+.ikey{color:var(--ink-soft)}.ival{font-weight:600}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.prog{background:var(--paper-2);border-radius:99px;height:7px;overflow:hidden;margin:5px 0;box-shadow:inset 0 1px 2px rgba(90,65,20,.2)}
+.prog-f{height:100%;border-radius:99px;transition:width .5s;background:linear-gradient(90deg,var(--teal),#28B0A2)}
+.green{color:#1E7A4C}.red{color:#B23A2A}.blue{color:#1F6FA5}.amber{color:#9A6710}
+label{font-size:11px;color:var(--ink-soft);display:block;margin-bottom:4px;font-weight:500}
+select,input[type=text]{width:100%;padding:8px 11px;font-size:12px;border:1px solid var(--line-2);border-radius:10px;background:#FFFDF7;color:var(--ink);font-family:inherit;transition:border-color .15s,box-shadow .15s}
+select:focus,input[type=text]:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(21,130,122,.18)}
+input[type=range]{width:100%;accent-color:var(--teal)}
+.toast{padding:11px 14px;border-radius:11px;font-size:12px;font-weight:600;border:1px solid;margin:0 0 8px;display:flex;align-items:center;gap:8px;box-shadow:0 8px 18px -10px rgba(60,40,10,.4)}
+.toast-g{background:#E8F6EC;border-color:#8FCB9F;color:#17512F}
+.toast-b{background:#FBEAE7;border-color:#E39C93;color:#5A211A}
+.toast-i{background:#E7F0FA;border-color:#9BC1E6;color:#123A5C}
+.toast-a{background:#FBEFD6;border-color:#EAC072;color:#5A3D0A}
+#hud{display:grid;grid-template-columns:repeat(6,1fr);background:linear-gradient(180deg,#16544E,#0E3833);border-bottom:3px solid var(--gold);padding:11px 14px;gap:6px}
+.hstat{text-align:center;position:relative}
+.hstat+.hstat::before{content:"";position:absolute;left:-3px;top:15%;height:70%;width:1px;background:rgba(255,255,255,.08)}
+.hlabel{font-size:9px;color:#93BEB7;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.hval{font-family:'Fredoka',sans-serif;font-size:15px;font-weight:600;color:#FBF4E4;margin-top:1px}
+#hud .green{color:#63D6A0}#hud .red{color:#F5988A}#hud .blue{color:#84C2F2}#hud .amber{color:#F2C46A}
+#brandbar{display:flex;align-items:center;gap:10px;padding:9px 16px;background:linear-gradient(180deg,#0F3E39,#0B2E2A);color:#FBF4E4}
+.brand-logo{font-size:19px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+.brand-word{font-family:'Fredoka',sans-serif;font-weight:700;font-size:16px;letter-spacing:.02em;background:linear-gradient(90deg,#F3C969,#E0A32E);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.brand-studio{margin-left:auto;font-size:12px;font-weight:600;color:#9FCFC8}
+.brand-studio::before{content:"🎥 ";filter:grayscale(.2)}
+#tabs{display:flex;background:transparent;border-bottom:1px solid var(--line);padding:10px 12px 0;gap:4px;flex-wrap:wrap}
+.tab{padding:7px 13px;font-size:12px;font-weight:600;color:var(--ink-soft);cursor:pointer;border-radius:11px 11px 0 0;border:1px solid transparent;background:transparent;font-family:'Fredoka',sans-serif;transition:color .12s,background .12s}
+.tab:hover{color:var(--teal-d)}
+.tab.on{background:var(--paper);color:var(--teal-d);border:1px solid var(--line);border-bottom-color:var(--paper);margin-bottom:-1px;box-shadow:0 -4px 10px -6px rgba(0,0,0,.25)}
+#main{padding:14px}
+.poster{width:48px;height:68px;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:3px;flex-shrink:0;border:1px solid rgba(0,0,0,.1);position:relative;box-shadow:0 6px 12px -6px rgba(0,0,0,.45)}
+.poster::after{content:"";position:absolute;inset:0;border-radius:7px;background:linear-gradient(160deg,rgba(255,255,255,.35),rgba(255,255,255,0) 45%);pointer-events:none}
+.poster-ico{font-size:20px;position:absolute;top:6px;left:50%;transform:translateX(-50%)}
+.poster-lbl{font-size:7px;font-weight:600;text-align:center;line-height:1.2;word-break:break-word;position:relative;z-index:1}
+.bar-outer{background:var(--paper-2);border-radius:99px;height:8px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(90,65,20,.2)}
+.bar-inner{height:100%;border-radius:99px;transition:width .6s}
+.ava{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;box-shadow:0 3px 8px -4px rgba(0,0,0,.4),inset 0 0 0 2px rgba(255,255,255,.35)}
+.award{display:inline-flex;align-items:center;gap:3px;background:linear-gradient(180deg,#FBEFD3,#F5DFA6);border:1px solid #E4BB6A;color:#5A3D0A;padding:3px 8px;border-radius:99px;font-size:10px;font-weight:600;margin:2px;box-shadow:0 2px 5px -3px rgba(150,110,20,.5)}
+#q-progress{flex:1;max-width:200px;height:6px;background:rgba(120,90,30,.18);border-radius:99px;overflow:hidden;margin-left:auto}
+#q-progress-f{height:100%;background:linear-gradient(90deg,var(--gold),#F3C969);border-radius:99px;transition:width .4s}
+.kbd{font-family:'Fredoka',sans-serif;font-size:10px;padding:2px 6px;border-radius:6px;background:var(--paper-2);border:1px solid var(--line-2);color:var(--ink-soft);box-shadow:0 1px 0 rgba(150,120,40,.2)}
+#season-strip{background:linear-gradient(180deg,#F7EDD7,#F0E3C4)!important;border-bottom:1px solid var(--line)!important;color:var(--ink)!important}
+#start-screen{background:linear-gradient(180deg,#FFF8E9,#F5E9CE);position:relative}
+#start-screen::before{content:"";display:block;height:12px;background:
+  repeating-linear-gradient(90deg,#0E3833 0 14px,transparent 14px 28px),linear-gradient(180deg,#15544E,#0F3E39);
+  background-size:28px 12px,100% 100%;box-shadow:inset 0 -6px 10px -8px rgba(0,0,0,.4)}
+#start-screen::after{content:"";display:block;height:12px;position:absolute;left:0;right:0;bottom:0;background:
+  repeating-linear-gradient(90deg,#0E3833 0 14px,transparent 14px 28px),linear-gradient(180deg,#0F3E39,#15544E);background-size:28px 12px,100% 100%}
+.hero-title{font-family:'Fredoka',sans-serif!important;font-weight:700!important;color:var(--teal-d)!important;letter-spacing:.01em}
+.hero-badge{display:inline-block;font-family:'Fredoka',sans-serif;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-d);background:#FBEFD3;border:1px solid #E4BB6A;padding:3px 12px;border-radius:99px;margin-bottom:12px}
+#end-screen{background:linear-gradient(180deg,#FFF8E9,#F3E7CC)}
+/* ── Real-game office UI (dark overlays on isometric stage) ── */
+:root{
+  --ui-panel:rgba(22,28,36,0.88);
+  --ui-panel-2:rgba(28,34,44,0.94);
+  --ui-line:rgba(255,255,255,0.08);
+  --ui-text:#F2F4F7;
+  --ui-muted:rgba(242,244,247,0.55);
+  --ui-gold:#F0B429;
+  --ui-orange:#E8922A;
+  --ui-green:#3DCF8E;
+}
+#app.playing{max-width:none;width:100%;margin:0;border-radius:0;min-height:100vh;background:#0a1016;box-shadow:none}
+body.playing{padding:0;background:#0a1016}
+.off-ov-panel{background:var(--ui-panel);color:var(--ui-text);border-radius:8px;border:1px solid var(--ui-line);box-shadow:0 12px 28px -14px rgba(0,0,0,.7);backdrop-filter:blur(10px)}
+.off-topstats{position:absolute;top:14px;left:14px;display:flex;gap:10px;align-items:center;z-index:6}
+.off-chip{display:flex;align-items:center;gap:8px;padding:7px 12px 7px 8px;border-radius:8px;background:var(--ui-panel);border:1px solid var(--ui-line);box-shadow:0 10px 24px -14px rgba(0,0,0,.65);backdrop-filter:blur(10px)}
+.off-chip-ico{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0}
+.off-chip-ico.cash{background:linear-gradient(180deg,#F6C85A,#D4921A);color:#3A2A08}
+.off-chip-ico.rep{background:linear-gradient(180deg,#FFE08A,#E0A32E);color:#3A2A08}
+.off-chip-ico.rp{background:linear-gradient(180deg,#7EC8FF,#3A8FD4);color:#062238}
+.off-chip-val{font-size:15px;font-weight:700;letter-spacing:.01em;color:#fff;line-height:1}
+.off-topright{position:absolute;top:14px;right:14px;display:flex;flex-direction:column;align-items:flex-end;gap:8px;z-index:6;max-width:240px}
+.off-clock{display:flex;align-items:center;gap:6px;padding:5px;border-radius:8px;background:var(--ui-panel);border:1px solid var(--ui-line);flex-wrap:wrap}
+.off-clock-meta{font-size:11px;color:var(--ui-muted);min-width:140px}
+.off-needs{display:flex;flex-direction:column;gap:6px;margin-top:8px;min-width:160px}
+.off-need{display:flex;flex-direction:column;gap:2px}
+.off-need label{font-size:10px;color:var(--ui-muted);display:flex;justify-content:space-between}
+.off-need-bar{height:4px;background:rgba(255,255,255,.12);border-radius:99px;overflow:hidden}
+.off-need-bar>i{display:block;height:100%;background:linear-gradient(90deg,#2E8B57,#E0A32E);width:50%}
+.off-care{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.off-mini-btn.on{outline:1px solid var(--gold)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.hide{display:none!important}
+.modal-card{background:#1a222c;color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:18px;max-width:420px;width:100%;box-shadow:0 24px 60px -20px rgba(0,0,0,.75)}
+.modal-card h3{margin:0 0 8px;font-size:16px}
+.modal-card p{margin:0;font-size:13px;color:rgba(255,255,255,.8);line-height:1.45}
+.off-mini-btn{width:30px;height:28px;border-radius:6px;border:1px solid var(--ui-line);background:rgba(255,255,255,0.04);color:var(--ui-text);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px}
+.off-mini-btn:hover:not(:disabled){background:rgba(255,255,255,0.1)}
+.off-mini-btn:disabled{opacity:.45;cursor:default}
+.off-mini-btn.primary{background:var(--ui-orange);border-color:#c77818;color:#fff}
+.off-mini-btn.primary:hover:not(:disabled){filter:brightness(1.08)}
+.off-date-pill{min-width:78px;padding:6px 10px;border-radius:6px;text-align:center;background:linear-gradient(180deg,#F0B429,#D4891A);color:#1a1206;font-size:11px;font-weight:800;letter-spacing:.06em;line-height:1.15}
+.off-side-panel{padding:10px 12px;width:210px}
+.off-panel-title{font-size:10px;color:var(--ui-muted);letter-spacing:.08em;font-weight:700;text-transform:uppercase;margin-bottom:6px}
+.off-anc-val{font-size:18px;font-weight:700;color:#fff}
+.off-keep{position:absolute;top:66px;left:14px;width:220px;padding:12px 12px 10px;z-index:6}
+.off-keep h4{font-size:13px;font-weight:700;margin-bottom:8px;color:#fff}
+.off-keep-item{display:flex;gap:8px;align-items:flex-start;margin:8px 0;font-size:11px;color:var(--ui-muted);line-height:1.35}
+.off-keep-item.done{color:rgba(242,244,247,0.85)}
+.off-keep-item .chk{width:14px;height:14px;border-radius:3px;border:1.5px solid rgba(255,255,255,0.25);margin-top:1px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent}
+.off-keep-item.done .chk{background:var(--ui-green);border-color:var(--ui-green);color:#062816}
+.off-keep-item.fail .chk{background:#E2556A;border-color:#E2556A;color:#fff}
+.off-keep-opt{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(226,85,106,0.9);font-weight:700;margin:10px 0 4px}
+.off-trendbar{height:6px;border-radius:99px;background:rgba(255,255,255,0.1);overflow:hidden;margin-top:4px}
+.off-trendfill{height:100%;border-radius:99px;background:linear-gradient(90deg,#3AAE6B,#6EE7B0)}
+.off-hintrow{display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none}
+.off-hint{font-size:11px;color:var(--ui-muted);text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.off-sel{color:#fff;font-weight:700;font-size:11px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+#game-screen{display:flex;flex-direction:column;min-height:100vh}
+#game-screen.hide{display:none!important}
+#home-stage{position:relative;flex:1;min-height:100vh;background:#0a1218}
+#sw{width:100%;height:100%;min-height:100vh;position:relative;overflow:hidden}
+#c3d{position:absolute;inset:0;display:block;width:100%!important;height:100%!important;cursor:grab;z-index:1}
+#panel-sheet{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;background:rgba(6,10,16,0.45);backdrop-filter:blur(3px);padding:12px 12px 88px}
+#panel-sheet.hide{display:none!important}
+.panel-sheet-card{flex:1;overflow:auto;background:var(--ui-panel-2);border-radius:14px;padding:14px 14px 18px;box-shadow:0 24px 60px -20px rgba(0,0,0,.75);border:1px solid var(--ui-line);color:var(--ui-text)}
+.panel-sheet-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.panel-sheet-title{font-size:16px;font-weight:700;color:#fff}
+.panel-sheet-card .card{background:rgba(255,255,255,0.04);border:1px solid var(--ui-line);border-radius:12px;box-shadow:none;color:var(--ui-text)}
+.panel-sheet-card .card-title{color:var(--ui-gold);font-family:Inter,sans-serif}
+.panel-sheet-card .card-title::before{background:var(--ui-gold)}
+.panel-sheet-card .ikey,.panel-sheet-card label{color:var(--ui-muted)!important}
+.panel-sheet-card .ival,.panel-sheet-card .irow{color:var(--ui-text);border-color:var(--ui-line)}
+.panel-sheet-card .row{border-color:var(--ui-line)}
+.panel-sheet-card select,.panel-sheet-card input[type=text]{background:rgba(0,0,0,0.25);border-color:rgba(255,255,255,0.12);color:#fff}
+.panel-sheet-card .btn:not(.btn-p):not(.btn-g):not(.btn-r){background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.14);color:#fff;box-shadow:none}
+.panel-sheet-card .prog,.panel-sheet-card .bar-outer{background:rgba(255,255,255,0.1);box-shadow:none}
+#global-dock{position:absolute;left:0;right:0;bottom:0;z-index:30;padding:8px 14px 14px;background:linear-gradient(180deg,rgba(8,12,18,0) 0%,rgba(8,12,18,0.7) 35%,rgba(8,12,18,0.95) 100%);display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none}
+#global-dock > *{pointer-events:auto}
+.off-dock{display:flex;gap:6px;justify-content:center;flex-wrap:nowrap;padding:8px;border-radius:14px;background:rgba(16,20,28,0.85);border:1px solid var(--ui-line);backdrop-filter:blur(10px)}
+.off-dock-btn{width:52px;min-height:48px;border-radius:10px;border:1px solid transparent;background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.75);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;flex:0 0 auto;font-size:16px;padding:6px 4px}
+.off-dock-btn span{font-size:9px;font-weight:600;letter-spacing:.02em;opacity:.8}
+.off-dock-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
+.off-dock-btn.on{background:rgba(240,180,41,0.18);border-color:rgba(240,180,41,0.45);color:#fff}
+.off-fab{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:99px;background:linear-gradient(180deg,#F0B429,#D4891A);color:#1a1206;border:none;font-size:13px;font-weight:800;cursor:pointer;box-shadow:0 10px 28px -10px rgba(212,137,26,.8)}
+.off-fab:hover{filter:brightness(1.06)}
+#toasts{position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:250;width:min(420px,90%);pointer-events:none}
+#toasts .toast{pointer-events:auto}
+@media(max-width:620px){body{padding:0}#app{margin:0;border-radius:0;min-height:100vh}.off-keep{display:none}.off-side-panel{width:160px}.off-dock-btn{width:44px;min-height:44px}.off-dock-btn span{display:none}}
+</style>
+</head>
+<body>
+
+<div id="app">
+
+<div id="start-screen">
+  <div style="text-align:center;padding:40px 20px 28px">
+    <div style="font-size:44px;margin-bottom:10px">🎬</div>
+    <div class="hero-badge">Movie Industry Tycoon</div>
+    <div class="hero-title" style="font-size:30px;margin-bottom:4px">The Executive</div>
+    <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:24px">From 1970 onward — short campaign ends after ~20 calendar quarters. Live clock + Advance week drive the run.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:340px;margin:0 auto 12px">
+      <div><label>Studio name</label><input type="text" id="sname" value="Apex Pictures"></div>
+      <div><label>Difficulty</label>
+        <select id="sdiff">
+          <option value="5000000">Indie ($5M)</option>
+          <option value="3500000" selected>Studio ($3.5M)</option>
+          <option value="2500000">Mogul ($2.5M)</option>
+        </select>
+      </div>
+    </div>
+    <div style="max-width:340px;margin:0 auto 20px;text-align:left">
+      <label>Region</label>
+      <select id="sregion">
+        <option value="Hollywood">🎬 Hollywood — balanced start</option>
+        <option value="Chinawood">🏮 Chinawood — +50% starting cash &amp; box office, lower prestige</option>
+      </select>
+    </div>
+    <div style="max-width:340px;margin:0 auto 20px;text-align:left">
+      <label>Campaign</label>
+      <select id="scampaign">
+        <option value="short" selected>Short — ~20 quarters via live clock (starts paused)</option>
+        <option value="full">Full — 1970→2020 dynasty</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-p" onclick="startGame()"><i class="ti ti-player-play"></i> Start</button>
+      <button class="btn btn-g hide" id="continue-btn" onclick="continueGame()"><i class="ti ti-player-track-next"></i> Continue</button>
+    </div>
+    <div id="start-meta" style="font-size:11px;color:var(--color-text-secondary);margin-top:14px"></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 16px 20px;max-width:500px;margin:0 auto">
+    <div class="card" style="text-align:center;padding:10px 8px">
+      <div style="font-size:20px;margin-bottom:4px">🎥</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">Greenlight films across 14 genres</div>
+    </div>
+    <div class="card" style="text-align:center;padding:10px 8px">
+      <div style="font-size:20px;margin-bottom:4px">⭐</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">Sign directors, actors & writers</div>
+    </div>
+    <div class="card" style="text-align:center;padding:10px 8px">
+      <div style="font-size:20px;margin-bottom:4px">🏆</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">Run your studio from the 3D office</div>
+    </div>
+  </div>
+</div>
+
+<div id="game-screen" class="hide">
+  <div id="season-strip" class="hide" aria-hidden="true">
+    <span id="ss-icon"></span>
+    <span id="ss-name"></span>
+    <span id="ss-tip"></span>
+    <div id="q-progress"><div id="q-progress-f"></div></div>
+  </div>
+  <!-- Hidden HUD fields kept for updateHUD() compatibility -->
+  <div id="hud" class="hide" aria-hidden="true">
+    <div class="hstat"><div class="hlabel">Cash</div><div class="hval green" id="h-cash"></div></div>
+    <div class="hstat"><div class="hlabel">Quarter</div><div class="hval" id="h-qtr"></div></div>
+    <div class="hstat"><div class="hlabel">Reputation</div><div class="hval blue" id="h-rep"></div></div>
+    <div class="hstat"><div class="hlabel">Research</div><div class="hval amber" id="h-rp"></div></div>
+    <div class="hstat"><div class="hlabel">In production</div><div class="hval" id="h-prod"></div></div>
+    <div class="hstat"><div class="hlabel">Total gross</div><div class="hval" id="h-gross"></div></div>
+  </div>
+  <div id="brandbar" class="hide" aria-hidden="true"><span class="brand-studio" id="brand-studio"></span></div>
+  <div id="tabs" class="hide" aria-hidden="true">
+    <button class="tab" data-tab="overview">Overview</button>
+    <button class="tab" data-tab="develop">Develop</button>
+    <button class="tab" data-tab="talent">Talent</button>
+    <button class="tab" data-tab="studio">Studio</button>
+    <button class="tab" data-tab="awards">Awards</button>
+  </div>
+
+  <div id="home-stage">
+    <div id="sw">
+      <canvas id="c3d"></canvas>
+      <div class="off-topstats">
+        <div class="off-chip"><div class="off-chip-ico cash">$</div><div class="off-chip-val" id="off-stat-cash">$0</div></div>
+        <div class="off-chip"><div class="off-chip-ico rep">★</div><div class="off-chip-val" id="off-stat-rep">0.0</div></div>
+        <div class="off-chip"><div class="off-chip-ico rp"><i class="ti ti-search" style="font-size:14px"></i></div><div class="off-chip-val" id="off-stat-rp">0</div></div>
+      </div>
+
+      <div class="off-topright">
+        <div class="off-clock">
+          <button class="off-mini-btn" id="btn-clock-pause" title="Pause" type="button" onclick="pauseGameClock()"><i class="ti ti-player-pause"></i></button>
+          <button class="off-mini-btn" id="btn-clock-play" title="Resume" type="button" onclick="resumeGameClock()"><i class="ti ti-player-play"></i></button>
+          <button class="off-mini-btn" type="button" data-speed="1" onclick="setGameSpeed(1)">1x</button>
+          <button class="off-mini-btn" type="button" data-speed="2" onclick="setGameSpeed(2)">2x</button>
+          <button class="off-mini-btn" type="button" data-speed="4" onclick="setGameSpeed(4)">4x</button>
+          <button class="off-mini-btn primary" title="Advance week (E)" type="button" id="eqbtn" onclick="endQuarter()"><i class="ti ti-player-track-next"></i></button>
+          <div class="off-date-pill" id="off-date">JAN<br>01</div>
+        </div>
+        <div class="off-ov-panel off-side-panel">
+          <div class="off-panel-title">Clock</div>
+          <div class="off-clock-meta" id="off-clock-label">—</div>
+          <div class="off-clock-meta" id="clock-speed-label">1x</div>
+          <div class="off-clock-meta" id="off-burn-day">Burn/day —</div>
+          <div class="off-needs">
+            <div class="off-need"><label>Energy <span id="need-energy">80</span></label><div class="off-need-bar"><i id="need-energy-bar"></i></div></div>
+            <div class="off-need"><label>Hygiene <span id="need-hygiene">80</span></label><div class="off-need-bar"><i id="need-hygiene-bar"></i></div></div>
+            <div class="off-need"><label>Health <span id="need-health">100</span></label><div class="off-need-bar"><i id="need-health-bar"></i></div></div>
+            <div class="off-need"><label>Stress <span id="need-stress">20</span></label><div class="off-need-bar"><i id="need-stress-bar" style="background:linear-gradient(90deg,#C0453B,#E0A32E)"></i></div></div>
+          </div>
+          <div class="off-care">
+            <button class="btn btn-sm" type="button" onclick="doSleep()">Sleep</button>
+            <button class="btn btn-sm" type="button" onclick="doShower()">Shower</button>
+            <button class="btn btn-sm" type="button" onclick="doDoctor()">Doctor</button>
+          </div>
+          <div style="margin-top:8px">
+            <label style="font-size:10px;color:var(--ui-muted)">Lifestyle</label>
+            <select id="lifestyle-sel" onchange="setLifestyle(this.value)" style="width:100%;margin-top:4px;font-size:11px">
+              <option value="frugal">Frugal</option>
+              <option value="comfortable" selected>Comfortable</option>
+              <option value="mogul">Mogul</option>
+            </select>
+          </div>
+        </div>
+        <div class="off-ov-panel off-side-panel">
+          <div class="off-panel-title">Ancillaries Revenue</div>
+          <div class="off-anc-val" id="off-anc-val">$0</div>
+          <div style="margin-top:6px;display:flex;justify-content:space-between;color:var(--ui-muted);font-size:11px">
+            <span>This quarter</span><span id="off-anc-qtr">Q—</span>
+          </div>
+        </div>
+        <div class="off-ov-panel off-side-panel">
+          <div class="off-panel-title">Trends</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--ui-muted)"><span>Genre tips</span><span id="off-trend-genres-pct">0%</span></div>
+              <div class="off-trendbar"><div class="off-trendfill" id="off-trend-genres-bar" style="width:0%"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--ui-muted)"><span>Themes unlocked</span><span id="off-trend-themes-pct">0%</span></div>
+              <div class="off-trendbar"><div class="off-trendfill" id="off-trend-themes-bar" style="width:0%;background:linear-gradient(90deg,#E8922A,#F0B429)"></div></div>
+            </div>
+            <button class="btn btn-sm" type="button" onclick="sampleMarket()">Analyst sample</button>
+          </div>
+        </div>
+        <div class="off-ov-panel off-side-panel">
+          <div class="off-panel-title">Graphics</div>
+          <div class="off-care">
+            <button class="btn btn-sm" type="button" onclick="setGfxPreset('low')">Low</button>
+            <button class="btn btn-sm" type="button" onclick="setGfxPreset('medium')">Med</button>
+            <button class="btn btn-sm" type="button" onclick="setGfxPreset('high')">High</button>
+            <button class="btn btn-sm" type="button" onclick="setGfxMode('cinematic')">Cinematic</button>
+            <button class="btn btn-sm" type="button" onclick="setGfxMode('pathtrace')">RT-look</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="off-keeprolling" class="off-ov-panel off-keep">
+        <h4>Keep rolling!</h4>
+        <div id="off-keep-list"></div>
+        <div style="margin-top:10px;font-size:11px;color:var(--ui-muted)"><span id="off-keep-studio"></span></div>
+        <div style="margin-top:6px;font-size:10px;color:var(--ui-muted)" id="off-season-tip"></div>
+      </div>
+
+      <div style="position:absolute;bottom:70px;left:14px;right:14px;z-index:5;pointer-events:none">
+        <div class="off-hintrow" style="pointer-events:auto">
+          <div class="off-hint">Drag to rotate · Click trophies or posters</div>
+          <div class="off-sel" id="off-sel"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="toasts"></div>
+
+    <div id="panel-sheet" class="hide">
+      <div class="panel-sheet-card">
+        <div class="panel-sheet-head">
+          <div class="panel-sheet-title" id="panel-sheet-title">Menu</div>
+          <button class="btn btn-sm" type="button" onclick="goHome()"><i class="ti ti-building"></i> Office</button>
+        </div>
+        <div id="main">
+    <div id="tab-overview" class="hide">
+      <div class="g2">
+        <div class="card">
+          <div class="card-title">Financials</div>
+          <div class="irow"><span class="ikey">Cash</span><span class="ival green" id="o-cash"></span></div>
+          <div class="irow"><span class="ikey">Burn/day</span><span class="ival red" id="o-oh"></span></div>
+          <div class="irow"><span class="ikey">Last qtr revenue</span><span class="ival" id="o-rev"></span></div>
+          <div class="irow"><span class="ikey">Qtr net</span><span class="ival" id="o-net"></span></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Studio</div>
+          <div class="irow"><span class="ikey">Reputation</span><span class="ival blue" id="o-rep"></span></div>
+          <div class="irow"><span class="ikey">Staff</span><span class="ival" id="o-staff"></span></div>
+          <div class="irow"><span class="ikey">Films released</span><span class="ival" id="o-released"></span></div>
+          <div class="irow"><span class="ikey">Awards won</span><span class="ival" id="o-awards"></span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">In production</div>
+        <div id="o-prod-list"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Box office — top releases</div>
+        <div id="o-bo-chart"></div>
+        <div id="o-rel-list" style="margin-top:8px"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Event log</div>
+        <div id="o-log" style="max-height:100px;overflow-y:auto;font-size:11px;color:var(--color-text-secondary);line-height:1.7"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:4px">
+        <button class="btn btn-p" onclick="endQuarter()"><i class="ti ti-player-skip-forward"></i> Advance week</button>
+        <span style="font-size:11px;color:var(--color-text-secondary)" id="o-preview"></span>
+        <span style="font-size:10px;color:var(--color-text-secondary);margin-left:auto"><span class="kbd">E</span> end quarter · <span class="kbd">Esc</span> office</span>
+      </div>
+    </div>
+
+    <div id="tab-develop" class="hide">
+      <div class="card">
+        <div class="card-title">Movies in development</div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+          <button class="btn btn-p" onclick="openGL()"><i class="ti ti-plus"></i> New Movie</button>
+          <span style="font-size:11px;color:var(--color-text-secondary)">Max 3 at once · Bigger budgets take longer</span>
+        </div>
+        <div class="card-title">Season genre guide</div>
+        <div id="d-genre-guide"></div>
+        <div class="card-title" style="margin-top:12px">Theme library</div>
+        <div id="d-theme-guide"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Active projects</div>
+        <div id="d-prod-list"></div>
+      </div>
+    </div>
+
+    <div id="tab-talent" class="hide">
+      <div class="card">
+        <div class="card-title">Your roster <span id="t-roster-meta" style="font-weight:400;color:var(--color-text-secondary)"></span></div>
+        <div id="t-roster-list"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Talent market <span style="font-weight:400;color:var(--color-text-secondary)">— refreshes every 2 quarters</span></div>
+        <div class="g3" id="t-market"></div>
+      </div>
+    </div>
+
+    <div id="tab-studio" class="hide">
+      <div class="card">
+        <div class="card-title">Studio upgrades</div>
+        <div id="s-upgrades"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Marketing campaigns</div>
+        <div id="s-mkt"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Emergency finance</div>
+        <div class="irow">
+          <div>
+            <div style="font-size:13px;font-weight:500">Bank loan — $500k</div>
+            <div style="font-size:11px;color:var(--color-text-secondary)">15% interest/qtr, auto-repaid over 4 quarters. Max 2 loans.</div>
+          </div>
+          <button class="btn btn-sm btn-r" id="loan-btn" onclick="takeLoan()">Take loan</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-awards" class="hide">
+      <div class="card">
+        <div class="card-title">The Gaspar Awards — Trophy cabinet</div>
+        <div id="a-trophies"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">All-time box office</div>
+        <div id="a-lb"></div>
+      </div>
+      <div id="off-strip" style="display:flex;gap:7px;flex-wrap:wrap;margin-top:4px"></div>
+    </div>
+
+    <div id="gl-panel" class="hide">
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div style="font-size:15px;font-weight:500">Greenlight new film</div>
+      <button class="btn btn-sm" onclick="closeGL()"><i class="ti ti-x"></i> Cancel</button>
+    </div>
+    <div class="g2" style="margin-bottom:10px">
+      <div><label>Film title</label><input type="text" id="gl-title" value=""></div>
+      <div><label>Genre</label>
+        <select id="gl-genre" onchange="glGenreChange()"></select>
+      </div>
+    </div>
+    <div class="g2" style="margin-bottom:10px">
+      <div><label>Theme</label><select id="gl-theme" onchange="glQualityPreview()"></select></div>
+      <div><label>Age rating</label><select id="gl-rating" onchange="glRatingChange()"></select></div>
+    </div>
+    <div style="margin-bottom:10px">
+      <label>Sequel / franchise (optional)</label>
+      <select id="gl-sequel" onchange="glSequelChange()"><option value="">— Original IP —</option></select>
+    </div>
+    <div id="gl-genre-hint" style="padding:8px;border-radius:8px;font-size:12px;background:var(--color-background-secondary);margin-bottom:10px"></div>
+    <div style="margin-bottom:10px">
+      <label>Budget: <span id="gl-bval" style="font-weight:500;color:var(--color-text-primary)">$5M</span> · Size: <span id="gl-size-lbl" style="font-weight:500">Medium</span> · <span id="gl-qval" style="font-weight:500">~3 qtrs</span></label>
+      <input type="range" id="gl-budget" min="1" max="45" value="5" step="1" oninput="glBudgetChange()">
+      <div id="gl-size-ladder" style="display:flex;justify-content:space-between;font-size:10px;color:var(--color-text-secondary);margin-top:4px"><span>Small $3M</span><span>Med $8M</span><span>Large $20M</span><span>BB $45M</span></div>
+    </div>
+    <div class="g2" style="margin-bottom:10px">
+      <div><label>Alloc write %</label><input type="range" id="gl-alloc-write" min="5" max="40" value="15" oninput="glAllocChange()"></div>
+      <div><label>Alloc shoot %</label><input type="range" id="gl-alloc-shoot" min="30" max="70" value="55" oninput="glAllocChange()"></div>
+    </div>
+    <div class="g2" style="margin-bottom:10px">
+      <div><label>Alloc post %</label><input type="range" id="gl-alloc-post" min="5" max="40" value="20" oninput="glAllocChange()"></div>
+      <div><label>Alloc mkt %</label><input type="range" id="gl-alloc-mkt" min="5" max="30" value="10" oninput="glAllocChange()"></div>
+    </div>
+    <div id="gl-alloc-sum" style="font-size:11px;color:var(--color-text-secondary);margin-bottom:10px">Alloc sums to 100%</div>
+    <div id="gl-premium" style="margin-bottom:10px;font-size:12px"></div>
+    <div class="g2" style="margin-bottom:10px">
+      <div><label>Director</label><select id="gl-dir"></select></div>
+      <div><label>Lead actor</label><select id="gl-actor"></select></div>
+    </div>
+    <div class="g2" style="margin-bottom:10px">
+      <div><label>Writer</label><select id="gl-writer"></select></div>
+      <div><label>Producer</label><select id="gl-producer"></select></div>
+    </div>
+    <div style="margin-bottom:14px">
+      <label>Distribution</label>
+      <select id="gl-dist" onchange="glQualityPreview()">
+        <option value="third">Third-party — cut 20–35% (uncertain), possible delay</option>
+        <option value="self">Self-distribute — keep share, reach roll &amp; possible hold</option>
+      </select>
+    </div>
+    <div id="gl-quality-preview" style="padding:8px;border-radius:8px;background:var(--color-background-secondary);font-size:12px;margin-bottom:12px"></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn" onclick="closeGL()">Cancel</button>
+      <button class="btn btn-p" onclick="doGreenlight()"><i class="ti ti-player-play"></i> Greenlight</button>
+    </div>
+  </div>
+    </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="global-dock">
+      <button class="off-fab" type="button" onclick="quickNewMovie()" id="fab-new-movie"><i class="ti ti-plus"></i> New Movie</button>
+      <div class="off-dock" aria-label="Quick navigation">
+        <button class="off-dock-btn" data-dock="develop" title="Movies" type="button" onclick="goTab('develop')"><i class="ti ti-movie"></i><span>Movies</span></button>
+        <button class="off-dock-btn" data-dock="studio" title="Research" type="button" onclick="goTab('studio')"><i class="ti ti-bulb"></i><span>Research</span></button>
+        <button class="off-dock-btn" data-dock="talent" title="Staff" type="button" onclick="goTab('talent')"><i class="ti ti-users"></i><span>Staff</span></button>
+        <button class="off-dock-btn" data-dock="overview" title="Finance" type="button" onclick="goTab('overview')"><i class="ti ti-chart-bar"></i><span>Finance</span></button>
+        <button class="off-dock-btn" data-dock="awards" title="Awards" type="button" onclick="goTab('awards')"><i class="ti ti-trophy"></i><span>Awards</span></button>
+        <button class="off-dock-btn on" data-dock="home" title="Office" type="button" onclick="goHome()"><i class="ti ti-building"></i><span>Office</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="end-screen" class="hide" style="text-align:center;padding:36px 20px">
+  <div style="font-size:48px;margin-bottom:10px" id="e-icon">🏆</div>
+  <div style="font-size:22px;font-weight:500;margin-bottom:6px" id="e-title"></div>
+  <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:20px" id="e-sub"></div>
+  <div class="card" style="max-width:340px;margin:0 auto 16px"><div id="e-stats"></div></div>
+  <div id="e-awards" style="margin-bottom:16px"></div>
+  <div id="e-posters" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px"></div>
+  <button class="btn btn-p" onclick="location.reload()"><i class="ti ti-refresh"></i> Play again</button>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const GENRES=['Action','Drama','Comedy','Horror','Sci-Fi','Animation','Thriller','Romance','Adventure','Fantasy','Crime','Musical','Documentary','Western'];
+const GENRE_ICO={Action:'💥',Drama:'🎭',Comedy:'😂',Horror:'👻','Sci-Fi':'🚀',Animation:'✨',Thriller:'🔪',Romance:'💗',Adventure:'🗺️',Fantasy:'🐉',Crime:'🕵️',Musical:'🎵',Documentary:'🎥',Western:'🤠'};
+const GENRE_BG={Action:'#FAECE7',Drama:'#E6F1FB',Comedy:'#FAEEDA',Horror:'#FBEAF0','Sci-Fi':'#EEEDFE',Animation:'#EAF3DE',Thriller:'#ECECEA',Romance:'#FDEAF0',Adventure:'#EAF4EC',Fantasy:'#F0EAFB',Crime:'#ECEAE4',Musical:'#FBEFE0',Documentary:'#E8F0F2',Western:'#F5EBDD'};
+const GENRE_FG={Action:'#712B13',Drama:'#0C447C',Comedy:'#412402',Horror:'#72243E','Sci-Fi':'#3C3489',Animation:'#27500A',Thriller:'#2B2B2B',Romance:'#8A1E4C',Adventure:'#155E3B',Fantasy:'#4A2A7A',Crime:'#3A2E1A',Musical:'#8A4A0A',Documentary:'#245057',Western:'#6A3A16'};
+const GENRE_BAR={Action:'#D85A30',Drama:'#378ADD',Comedy:'#EF9F27',Horror:'#D4537E','Sci-Fi':'#7F77DD',Animation:'#1D9E75',Thriller:'#6B6B6B',Romance:'#E85D8A',Adventure:'#3AAE6B',Fantasy:'#9B6FD4',Crime:'#8A6A3A',Musical:'#E0902E',Documentary:'#4E9AA6',Western:'#C08040'};
+const GENRE_3D={Action:0xC83818,Drama:0x2860A8,'Sci-Fi':0x6048B8,Comedy:0xC07820,Horror:0x781A40,Animation:0x1A7840,Thriller:0x555555,Romance:0xC83E6B,Adventure:0x2E8B57,Fantasy:0x7A4FB0,Crime:0x6B4E2A,Musical:0xC77A1A,Documentary:0x3A7E8A,Western:0xA0642A};
+const SEASONS=[
+  {name:'Winter',q:1,icon:'❄️',tip:'Comedy, Animation & Romance peak · Horror weak',mods:{Comedy:1.35,Animation:1.45,Horror:0.75,Action:0.9,'Sci-Fi':1.0,Drama:1.1,Romance:1.3,Musical:1.25,Fantasy:1.15}},
+  {name:'Spring',q:2,icon:'🌸',tip:'Awards season · Drama, Romance & prestige shine',mods:{Drama:1.45,Comedy:1.1,Horror:0.9,'Sci-Fi':1.0,Action:0.95,Animation:1.0,Romance:1.35,Documentary:1.2,Musical:1.1}},
+  {name:'Summer',q:3,icon:'☀️',tip:'Blockbuster season · Action, Sci-Fi & Adventure dominate',mods:{Action:1.55,'Sci-Fi':1.35,Animation:1.2,Drama:0.8,Comedy:1.1,Horror:1.0,Adventure:1.4,Fantasy:1.3}},
+  {name:'Fall',q:4,icon:'🍂',tip:'Horror, Thriller & Crime lead · Drama awards push',mods:{Horror:1.85,Drama:1.25,Comedy:0.9,Action:1.05,'Sci-Fi':0.95,Animation:1.0,Thriller:1.4,Crime:1.35,Western:1.2}},
+];
+const UPGRADES=[
+  {id:'vfx',cat:'Production',name:'VFX Stage',desc:'Sci-Fi & Action quality +10.',cost:500000,icon:'ti-sparkles',owned:false},
+  {id:'sound',cat:'Post-Production',name:'Sound Stage',desc:'All films quality +6 · unlocks Executive staff.',cost:350000,icon:'ti-music',owned:false},
+  {id:'pr',cat:'Business',name:'PR Department',desc:'Bad event reputation losses halved · unlocks Marketer.',cost:400000,icon:'ti-speakerphone',owned:false},
+  {id:'intl',cat:'Business',name:'International Distribution',desc:'All box office +20%.',cost:700000,icon:'ti-world',owned:false},
+  {id:'anim',cat:'Production',name:'Animation Studio',desc:'Animation budget cost −25%.',cost:600000,icon:'ti-wand',owned:false},
+  {id:'postprod',cat:'Post-Production',name:'Post-Production Suite',desc:'Post phase hours −15% (soft floor).',cost:550000,icon:'ti-cut',owned:false},
+  {id:'streaming',cat:'Ancillaries',name:'Streaming Deal',desc:'Catalog residuals each quarter (diminishing + soft-capped).',cost:800000,icon:'ti-device-tv',owned:false},
+  {id:'recruit',cat:'Business',name:'Star Recruiter',desc:'Talent market shows only quality 72+ · unlocks Sales.',cost:450000,icon:'ti-star',owned:false},
+  {id:'homevideo',cat:'Ancillaries',name:'Home Entertainment Division',desc:'Released films earn quarterly residuals scaled by critic & audience scores. Classics & cult hits earn more.',cost:650000,icon:'ti-disc',owned:false},
+  {id:'writers',cat:'Research',name:"Writers' Room",desc:'Unlocks the full theme library immediately for every new film.',rp:true,cost:60,icon:'ti-pencil',owned:false},
+  {id:'script',cat:'Research',name:'Script Lab',desc:'All films quality +4.',rp:true,cost:40,icon:'ti-book',owned:false},
+  {id:'marketing',cat:'Research',name:'Marketing Dept',desc:'All releases +10% box office.',rp:true,cost:50,icon:'ti-chart-arrows',owned:false},
+  {id:'analytics',cat:'Research',name:'Analytics Dept',desc:'+3 RP/quarter · unlocks Analyst market sampling.',rp:true,cost:30,icon:'ti-chart-bar',owned:false},
+];
+const MKT=[
+  {id:'trailer',name:'Trailer Blitz',desc:'Next releasing film +25% opening gross.',cost:150000,icon:'ti-player-play'},
+  {id:'awards',name:'Awards Campaign',desc:'Quality 70+ films get +20% award nomination chance.',cost:200000,icon:'ti-trophy'},
+  {id:'social',name:'Social Media Buzz',desc:'Reputation +7 this quarter.',cost:80000,icon:'ti-brand-instagram'},
+  {id:'intlpromo',name:'International Promo',desc:'All releasing films this quarter +12%.',cost:120000,icon:'ti-plane'},
+];
+const TALENT=[
+  {name:'Marcus Cole',role:'Director',star:0,q:70,cost:120000,sal:80000,genre:'Action',boost:{q:8},ini:'MC',bg:'#E6F1FB',fg:'#0C447C'},
+  {name:'Sofia Reyes',role:'Director',star:0,q:75,cost:180000,sal:100000,genre:'Drama',boost:{q:12},ini:'SR',bg:'#FBEAF0',fg:'#72243E'},
+  {name:'Jin Park',role:'Director',star:1,q:88,cost:350000,sal:180000,genre:'Sci-Fi',boost:{q:18},ini:'JP',bg:'#EEEDFE',fg:'#3C3489'},
+  {name:'Nadia Petrov',role:'Director',star:0,q:72,cost:140000,sal:90000,genre:'Comedy',boost:{q:9},ini:'NP',bg:'#FAEEDA',fg:'#412402'},
+  {name:'Theo Williams',role:'Director',star:1,q:92,cost:500000,sal:220000,genre:'Drama',boost:{q:22},ini:'TW',bg:'#E1F5EE',fg:'#085041'},
+  {name:'Carla Diaz',role:'Director',star:0,q:68,cost:100000,sal:70000,genre:'Horror',boost:{q:7},ini:'CD',bg:'#FBEAF0',fg:'#72243E'},
+  {name:'Yuki Tanaka',role:'Director',star:1,q:85,cost:320000,sal:160000,genre:'Animation',boost:{q:16},ini:'YT',bg:'#EAF3DE',fg:'#27500A'},
+  {name:'Ray Chen',role:'Writer',star:0,q:65,cost:60000,sal:40000,genre:null,boost:{q:5},ini:'RC',bg:'#FAEEDA',fg:'#412402'},
+  {name:'Emma Hart',role:'Writer',star:0,q:78,cost:100000,sal:60000,genre:null,boost:{q:10},ini:'EH',bg:'#EAF3DE',fg:'#27500A'},
+  {name:'Sam Brooks',role:'Writer',star:1,q:85,cost:200000,sal:90000,genre:null,boost:{q:15},ini:'SB',bg:'#EEEDFE',fg:'#3C3489'},
+  {name:'Zara Moon',role:'Actor',star:1,q:90,cost:400000,sal:200000,genre:null,boost:{q:12,gross:.15},ini:'ZM',bg:'#FAECE7',fg:'#712B13'},
+  {name:'Leo Vance',role:'Actor',star:1,q:82,cost:280000,sal:150000,genre:null,boost:{q:8,gross:.10},ini:'LV',bg:'#FAEEDA',fg:'#412402'},
+  {name:'Maya Stone',role:'Actor',star:0,q:70,cost:120000,sal:70000,genre:null,boost:{q:4,gross:.05},ini:'MS',bg:'#E6F1FB',fg:'#0C447C'},
+  {name:'David Park',role:'Actor',star:0,q:68,cost:100000,sal:60000,genre:null,boost:{q:3,gross:.04},ini:'DP',bg:'#EEEDFE',fg:'#3C3489'},
+  {name:'Iris Bloom',role:'Actor',star:1,q:88,cost:350000,sal:180000,genre:null,boost:{q:10,gross:.13},ini:'IB',bg:'#FBEAF0',fg:'#72243E'},
+  {name:'Chris Obi',role:'Actor',star:0,q:74,cost:130000,sal:75000,genre:null,boost:{q:5,gross:.06},ini:'CO',bg:'#EAF3DE',fg:'#27500A'},
+  {name:'Tom Graves',role:'Producer',star:0,q:72,cost:150000,sal:90000,genre:null,boost:{q:6,eff:.10},ini:'TG',bg:'#FAEEDA',fg:'#412402'},
+  {name:'Anna Wells',role:'Producer',star:0,q:80,cost:220000,sal:120000,genre:null,boost:{q:9,eff:.15},ini:'AW',bg:'#E1F5EE',fg:'#085041'},
+];
+const EVENTS=[
+  {t:'A cast member is caught in a public scandal!',rep:-12,cash:0,bad:1},
+  {t:'Behind-the-scenes footage goes viral overnight!',rep:8,cash:50000,bad:0},
+  {t:'A streaming platform signs a co-production deal.',rep:3,cash:200000,bad:0},
+  {t:'Crew strike delays your longest project by one quarter.',rep:-5,cash:-80000,bad:1,strike:1},
+  {t:'Emergency investor injection keeps you afloat.',rep:0,cash:250000,bad:0},
+  {t:'A rival megahit is eating your audience share.',rep:-5,cash:-60000,bad:1},
+  {t:'Critics are already buzzing about an upcoming release!',rep:10,cash:0,bad:0},
+  {t:'Production overrun on set — unexpected costs.',rep:-3,cash:-120000,bad:1},
+  {t:'Major product placement deal signed.',rep:0,cash:160000,bad:0},
+  {t:'State film tax credit approved for your studio.',rep:0,cash:120000,bad:0},
+  {t:'Plagiarism lawsuit filed against one of your scripts.',rep:-8,cash:-150000,bad:1},
+  {t:'Your studio wins Industry Association of the Year.',rep:15,cash:0,bad:0},
+  {t:'A breakout indie rival steals festival buzz from your slate.',rep:-6,cash:0,bad:1},
+  {t:'Major distributor offers a guaranteed minimum on your next release.',rep:5,cash:100000,bad:0},
+  {t:'Union negotiators secure better crew rates — morale rises on set.',rep:4,cash:-40000,bad:0},
+];
+const AWARD_CATS=(window.Realism&&Realism.AWARD_CATS)||['Best Picture','Best Director','Best Actor','Best Screenplay','Best Score'];
+const THEMES=[
+  {name:'Heist',genres:['Crime','Action']},
+  {name:'Superhero',genres:['Action','Sci-Fi']},
+  {name:'Aliens',genres:['Sci-Fi','Horror']},
+  {name:'Robots',genres:['Sci-Fi','Action']},
+  {name:'Vampires',genres:['Horror','Romance']},
+  {name:'Zombies',genres:['Horror','Action']},
+  {name:'Forbidden Love',genres:['Romance','Drama']},
+  {name:'Coming of Age',genres:['Drama','Comedy']},
+  {name:'War',genres:['Action','Drama']},
+  {name:'Space Opera',genres:['Sci-Fi','Adventure']},
+  {name:'Detective',genres:['Crime','Thriller']},
+  {name:'Fairy Tale',genres:['Fantasy','Animation']},
+  {name:'Time Travel',genres:['Sci-Fi','Adventure']},
+  {name:'Monster',genres:['Horror','Sci-Fi']},
+  {name:'Rock Band',genres:['Musical','Drama']},
+  {name:'Sports',genres:['Drama','Comedy']},
+  {name:'Spy',genres:['Thriller','Action']},
+  {name:'Post-Apocalypse',genres:['Sci-Fi','Horror']},
+  {name:'Mythology',genres:['Fantasy','Adventure']},
+  {name:'Haunted House',genres:['Horror','Thriller']},
+  {name:'Gangsters',genres:['Crime','Drama']},
+  {name:'Treasure Hunt',genres:['Adventure','Action']},
+  {name:'Dragons',genres:['Fantasy','Adventure']},
+  {name:'Wizards',genres:['Fantasy','Animation']},
+  {name:'Serial Killer',genres:['Thriller','Horror']},
+  {name:'Cowboys',genres:['Western','Action']},
+  {name:'Outlaws',genres:['Western','Crime']},
+  {name:'Road Trip',genres:['Comedy','Adventure']},
+  {name:'High School',genres:['Comedy','Romance']},
+  {name:'Wedding',genres:['Romance','Comedy']},
+  {name:'Courtroom',genres:['Drama','Thriller']},
+  {name:'Nature',genres:['Documentary','Adventure']},
+  {name:'Biography',genres:['Documentary','Drama']},
+  {name:'True Crime',genres:['Documentary','Crime']},
+  {name:'Cyberpunk',genres:['Sci-Fi','Thriller']},
+  {name:'Kaiju',genres:['Action','Sci-Fi']},
+  {name:'Pirates',genres:['Adventure','Action']},
+  {name:'Ghosts',genres:['Horror','Drama']},
+  {name:'Talking Animals',genres:['Animation','Comedy']},
+  {name:'Fairy Godmother',genres:['Fantasy','Musical']},
+  {name:'Spies vs Spies',genres:['Thriller','Action']},
+  {name:'Disaster',genres:['Action','Drama']},
+  {name:'Underdog',genres:['Drama','Sports']},
+  {name:'Musician',genres:['Musical','Romance']},
+];
+const RATINGS=[
+  {name:'G',reach:0.85,quality:0,tip:'Widest audience, softer critics'},
+  {name:'PG',reach:0.95,quality:2,tip:'Broad family appeal'},
+  {name:'PG-13',reach:1.0,quality:4,tip:'Blockbuster sweet spot'},
+  {name:'R',reach:0.8,quality:8,tip:'Smaller reach, critics love it'},
+];
+function themeSynergy(theme,genre){
+  const t=THEMES.find(x=>x.name===theme);
+  if(!t)return 0;
+  return t.genres[0]===genre?2:(t.genres.includes(genre)?1:0);
+}
+const SAVE_KEY='executive_tycoon_save_v4';
+const HI_KEY='executive_tycoon_hi_v1';
+const TA=['Crimson','Dark','Silver','Infinite','Broken','Last','Electric','Neon','Forgotten','Hidden','Burning','Lost','Rising','Steel','Midnight','Golden','Shattered'];
+const TB=['Dawn','Horizon','Echo','Frontier','Legacy','Storm','Code','Shadow','Dream','Reign','Signal','Path','Gate','Flame','Wave','Kingdom','Abyss'];
+
+let G={};
+window.pauseGameClock=function(){};
+window.resumeGameClock=function(){};
+window.setGameSpeed=function(){};
+window.doSleep=function(){};
+window.doShower=function(){};
+window.doDoctor=function(){};
+window.setLifestyle=function(){};
+window.applyForLoan=function(){takeLoan();};
+window.doInvest=function(){};
+window.sampleMarket=function(){};
+window.setGfxPreset=function(){};
+window.setGfxMode=function(){};
+window.nameSuccessorUI=function(){};
+window.mentorHeir=function(){};
+window.retireCEO=function(){};
+const rnd=n=>Math.floor(Math.random()*n);
+const rng=(a,b)=>a+rnd(b-a+1);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const fmtM=n=>{const a=Math.abs(n);return(n<0?'-':'')+'$'+(a>=1e6?(a/1e6).toFixed(2)+'M':Math.round(a).toLocaleString())};
+const fmt=n=>'$'+Math.round(n).toLocaleString();
+const rTitle=()=>TA[rnd(TA.length)]+' '+TB[rnd(TB.length)];
+const season=()=>SEASONS[(G.q-1)%4];
+
+function show(id){document.getElementById(id).classList.remove('hide')}
+function hide(id){document.getElementById(id).classList.add('hide')}
+
+function toast(msg,type,dur=3500){
+  const c=document.getElementById('toasts');
+  const d=document.createElement('div');
+  d.className='toast toast-'+type;
+  d.innerHTML=msg;
+  c.prepend(d);
+  setTimeout(()=>{d.style.opacity='0';d.style.transition='opacity .4s';setTimeout(()=>d.remove(),400)},dur);
+  if(c.children.length>3)c.lastChild.remove();
+}
+function log(txt,cls=''){
+  const el=document.getElementById('o-log');
+  const d=document.createElement('div');
+  d.style.cssText='padding:2px 0;border-bottom:0.5px solid var(--color-border-tertiary)';
+  d.innerHTML=`<span style="color:var(--color-text-secondary)">[Q${G.q} Y${G.yr}]</span> <span class="${cls}">${txt}</span>`;
+  el.prepend(d);
+  if(el.children.length>60)el.lastChild.remove();
+}
+
+function calcOH(){
+  let o=50000;
+  G.roster.forEach(t=>o+=t.sal);
+  G.loans.forEach(l=>o+=l.int);
+  G.oh=o;
+}
+
+function calcScore(){
+  return Math.round(G.totalGross/1e6+G.rep*10+G.awards.length*500+(G.cash>0?G.cash/1e5:0));
+}
+function saveGame(){
+  try{localStorage.setItem(SAVE_KEY,JSON.stringify(G));}catch(e){}
+}
+function loadSavedGame(){
+  try{const raw=localStorage.getItem(SAVE_KEY);return raw?JSON.parse(raw):null;}catch(e){return null;}
+}
+function clearSave(){try{localStorage.removeItem(SAVE_KEY);}catch(e){}}
+function getHiScore(){try{return+(localStorage.getItem(HI_KEY)||0);}catch(e){return 0;}}
+function setHiScore(s){try{const h=getHiScore();if(s>h)localStorage.setItem(HI_KEY,String(s));}catch(e){}}
+function updateStartMeta(){
+  const hi=getHiScore();
+  const saved=loadSavedGame();
+  const meta=document.getElementById('start-meta');
+  const btn=document.getElementById('continue-btn');
+  if(saved&&((saved.campaignMode==='full'&&saved.year<2020)||(saved.campaignMode!=='full'&&saved.totalQ<20))&&saved.cash>-5000000){
+    btn.classList.remove('hide');
+    meta.textContent='Saved: '+saved.name+' · '+(saved.year||1970)+' Q'+saved.q+' · '+fmtM(saved.cash);
+  }else{btn.classList.add('hide');meta.textContent=hi?('Best score: '+hi.toLocaleString()):'';}
+}
+function continueGame(){
+  const saved=loadSavedGame();
+  const okFull=saved&&saved.campaignMode==='full'&&saved.year<2020&&saved.cash>-5000000;
+  const okShort=saved&&saved.campaignMode!=='full'&&saved.totalQ<20&&saved.cash>-5000000;
+  if(!okFull&&!okShort){toast('No valid save found.','b');updateStartMeta();return;}
+  G=saved;
+  hide('start-screen');show('game-screen');enterPlayingUI();
+  updateAll();
+  toast('▶ Resumed '+G.name,'i');
+  if(!window.three){ if(typeof window.init3D==='function') window.init3D(); }
+  else refresh3D();
+  goHome();
+}
+
+function startGame(){
+  const name=document.getElementById('sname').value.trim()||'Apex Pictures';
+  let cash=+document.getElementById('sdiff').value;
+  const regionEl=document.getElementById('sregion');
+  const region=regionEl?regionEl.value:'Hollywood';
+  if(region==='Chinawood')cash=Math.round(cash*1.5);
+  const themeCount=cash>=5000000?8:cash>=3500000?6:5;
+  const themePool=THEMES.map(t=>t.name).sort(()=>Math.random()-.5).slice(0,themeCount);
+  G={name,region,cash,rep:region==='Chinawood'?45:50,rp:0,q:1,yr:1,totalQ:0,totalGross:0,lastRev:0,oh:0,
+    films:[],released:[],roster:[],upgrades:JSON.parse(JSON.stringify(UPGRADES)),
+    activeMkt:[],awards:[],market:[],loans:[],streamRes:[],themes:themePool,franchises:{}};
+  refreshMarket();
+  hide('start-screen');show('game-screen');enterPlayingUI();
+  updateAll();
+  log('Studio founded. Welcome to Hollywood.','blue');
+  toast('🎬 '+name+' is open for business!','i');
+  init3D();
+  goHome();
+  saveGame();
+}
+
+function refreshMarket(){
+  const hasRec=G.upgrades.find(u=>u.id==='recruit'&&u.owned);
+  let pool=TALENT.filter(t=>!G.roster.find(r=>r.name===t.name));
+  if(hasRec)pool=pool.filter(t=>t.q>=72);
+  G.market=pool.sort(()=>Math.random()-.5).slice(0,6);
+}
+
+const PANEL_TITLES={overview:'Finance',develop:'Movies',talent:'Staff',studio:'Research',awards:'Gaspar Awards'};
+let currentView='home';
+
+function enterPlayingUI(){
+  document.body.classList.add('playing');
+  document.getElementById('app').classList.add('playing');
+}
+function leavePlayingUI(){
+  document.body.classList.remove('playing');
+  document.getElementById('app').classList.remove('playing');
+}
+function quickNewMovie(){
+  goTab('develop');
+  openGL();
+}
+
+function setDockActive(id){
+  document.querySelectorAll('#global-dock .off-dock-btn').forEach(btn=>{
+    btn.classList.toggle('on',btn.getAttribute('data-dock')===id);
+  });
+}
+
+function goHome(){
+  currentView='home';
+  ['overview','develop','talent','studio','awards'].forEach(t=>hide('tab-'+t));
+  hide('gl-panel');
+  hide('panel-sheet');
+  setDockActive('home');
+  const fab=document.getElementById('fab-new-movie');
+  if(fab)fab.classList.remove('hide');
+  refresh3D();
+  onResize3D();
+}
+
+function goTab(id){
+  if(id==='office'||id==='home'){goHome();return;}
+  if(typeof window.pauseGameClock==='function')window.pauseGameClock();
+  currentView=id;
+  ['overview','develop','talent','studio','awards'].forEach(t=>hide('tab-'+t));
+  hide('gl-panel');
+  show('panel-sheet');
+  show('tab-'+id);
+  const titleEl=document.getElementById('panel-sheet-title');
+  if(titleEl)titleEl.textContent=PANEL_TITLES[id]||id;
+  setDockActive(id);
+  const fab=document.getElementById('fab-new-movie');
+  if(fab)fab.classList.add('hide');
+  if(id==='talent')renderTalent();
+  if(id==='studio')renderStudio();
+  if(id==='awards')renderAwards();
+  if(id==='develop')renderDevelop();
+  if(id==='overview')renderOverview();
+  refresh3D();
+}
+
+function activeTabId(){
+  return currentView||'home';
+}
+
+function updateAll(){
+  calcOH();
+  updateHUD();
+  try{if(typeof window.updateBodyHud==='function')window.updateBodyHud();}catch(e){}
+  renderOverview();
+  const id=activeTabId();
+  if(id==='develop')renderDevelop();
+  if(id==='talent')renderTalent();
+  if(id==='studio')renderStudio();
+  if(id==='awards')renderAwards();
+  refresh3D();
+}
+
+function updateHUD(){
+  calcOH();
+  const s=season();
+  document.getElementById('ss-icon').textContent=s.icon;
+  const year=G.year||(1969+(G.yr||1));
+  document.getElementById('ss-name').textContent=s.name+' · Q'+G.q+' '+year;
+  document.getElementById('ss-tip').textContent=s.tip;
+  document.getElementById('h-cash').textContent=fmtM(G.cash);
+  document.getElementById('h-cash').className='hval '+(G.cash<0?'red':'green');
+  document.getElementById('h-qtr').textContent='Q'+G.q+' · '+year;
+  const prest=window.Realism?Realism.repToPrestige(G.rep):(G.rep/20);
+  document.getElementById('h-rep').textContent=(Math.round(prest*10)/10)+'/5';
+  document.getElementById('h-prod').textContent=G.films.length;
+  document.getElementById('h-gross').textContent=fmtM(G.totalGross);
+  const burnDay=window.Realism?Realism.hourlyBurn(G)*24:(G.oh/90);
+  const weekBurn=burnDay*7;
+  document.getElementById('o-preview').textContent='Burn/day: '+fmtM(burnDay)+' · Week ~'+fmtM(weekBurn)+' · Last rev: '+fmtM(G.lastRev||0);
+  const limit=G.campaignMode==='full'?200:20;
+  const prog=document.getElementById('q-progress-f');
+  if(prog)prog.style.width=Math.round(Math.min(100,(G.totalQ||0)/limit*100))+'%';
+  const rpEl=document.getElementById('h-rp');
+  if(rpEl)rpEl.textContent=Math.round(G.rp||0)+' RP';
+  const bs=document.getElementById('brand-studio');
+  if(bs)bs.textContent=(G.name||'')+(G.region?' · '+G.region:'')+(G.age?' · age '+G.age:'');
+  const oc=document.getElementById('off-stat-cash');
+  if(oc)oc.textContent=fmtM(G.cash);
+  const or=document.getElementById('off-stat-rep');
+  if(or)or.textContent=(Math.round(prest*10)/10).toFixed(1);
+  const orp=document.getElementById('off-stat-rp');
+  if(orp)orp.textContent=Math.round(G.rp||0);
+  if(window.three||three)refresh3D();
+}
+
+function renderOverview(){
+  calcOH();
+  const burnDay=window.Realism?Realism.hourlyBurn(G)*24:(G.oh/90);
+  document.getElementById('o-cash').textContent=fmtM(G.cash);
+  document.getElementById('o-oh').textContent=fmtM(burnDay);
+  document.getElementById('o-rev').textContent=fmtM(G.lastRev);
+  const net=(G.lastRev||0)-burnDay*7;
+  const ne=document.getElementById('o-net');
+  ne.textContent=(net>=0?'+':'')+fmtM(net);
+  ne.className='ival '+(net>=0?'green':'red');
+  document.getElementById('o-rep').textContent=Math.round(G.rep)+'/100';
+  document.getElementById('o-staff').textContent=G.roster.length;
+  document.getElementById('o-released').textContent=G.released.length;
+  document.getElementById('o-awards').textContent=G.awards.length;
+
+  const pl=document.getElementById('o-prod-list');
+  if(!G.films.length){pl.innerHTML='<p style="font-size:13px;color:var(--color-text-secondary)">No films in production. Visit Develop to greenlight one.</p>'}
+  else pl.innerHTML=G.films.map(f=>filmProdRow(f)).join('');
+
+  const boEl=document.getElementById('o-bo-chart');
+  const relEl=document.getElementById('o-rel-list');
+  if(!G.released.length){boEl.innerHTML='<p style="font-size:13px;color:var(--color-text-secondary)">No films released yet.</p>';relEl.innerHTML=''}
+  else{
+    const sorted=[...G.released].sort((a,b)=>b.gross-a.gross).slice(0,5);
+    const max=sorted[0].gross;
+    boEl.innerHTML=sorted.map(f=>`<div style="margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px">
+        <span>${GENRE_ICO[f.genre]} ${f.title} <span class="pill" style="background:${GENRE_BG[f.genre]};color:${GENRE_FG[f.genre]}">${f.genre}</span></span>
+        <span style="font-weight:500">${fmtM(f.gross)}</span>
+      </div>
+      <div class="bar-outer"><div class="bar-inner" style="width:${Math.round(f.gross/max*100)}%;background:${GENRE_BAR[f.genre]}"></div></div>
+    </div>`).join('');
+    relEl.innerHTML=sorted.map(f=>`<div class="row">
+      <div class="poster" style="background:${GENRE_BG[f.genre]}">
+        <div class="poster-ico">${GENRE_ICO[f.genre]}</div>
+        <div class="poster-lbl" style="color:${GENRE_FG[f.genre]}">${f.title}</div>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:500">${f.title}${f.classic?' <span class="pill" style="background:#EAF3DE;color:#27500A">🥑 Classic</span>':''}${f.cult?' <span class="pill" style="background:#FBEAF0;color:#72243E">🥤 Cult</span>':''}</div>
+        <div style="font-size:11px;color:var(--color-text-secondary)">🥑${f.critic??'–'} 🥤${f.audience??'–'}${f.theme?' · '+f.theme:''}${f.rating?' · '+f.rating:''} · ${fmtM(f.gross)} · ROI: ${Math.round(((f.net??f.gross)/f.budget-1)*100)}%</div>
+        ${f.awards&&f.awards.length?'<div style="margin-top:3px">'+f.awards.map(a=>`<span class="award"><i class="ti ti-trophy" style="font-size:10px"></i>${a}</span>`).join('')+'</div>':''}
+      </div>
+    </div>`).join('');
+  }
+}
+
+function filmProdRow(f){
+  let prog=50;
+  let leftH=0;
+  if(f.hoursLeft){
+    leftH=(f.hoursLeft.pre||0)+(f.hoursLeft.prod||0)+(f.hoursLeft.post||0);
+    const maxH={small:840,medium:1260,large:1920,blockbuster:3080}[f.size]||1260;
+    prog=Math.round(Math.min(99,(1-leftH/maxH)*100));
+  }else if(f.totalQ)prog=Math.round(((f.totalQ-f.ql)/f.totalQ)*100);
+  const seq=(f.installment&&f.installment>1)?` <span class="pill" style="background:#EEEDFE;color:#3C3489">Inst. ${f.installment}</span>`:'';
+  const qtxt=f.qualityEst?(`est ${f.qualityEst.lo}–${f.qualityEst.hi}`):('Q est: '+Math.round(f.quality||0));
+  const phase=f.phase?String(f.phase):'prod';
+  const timeTxt=f.hoursLeft
+    ? `${phase} · ${leftH}h left (${f.hoursLeft.pre||0}pre/${f.hoursLeft.prod||0}prod/${f.hoursLeft.post||0}post)`
+    : (f.ql+' qtr remaining');
+  return`<div class="row">
+    <div class="poster" style="background:${GENRE_BG[f.genre]}">
+      <div class="poster-ico">${GENRE_ICO[f.genre]}</div>
+      <div class="poster-lbl" style="color:${GENRE_FG[f.genre]}">${f.title}</div>
+    </div>
+    <div style="flex:1;min-width:0">
+      <div style="font-size:13px;font-weight:500">${f.title}${seq}</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)"><span class="pill" style="background:${GENRE_BG[f.genre]};color:${GENRE_FG[f.genre]}">${f.genre}</span>${f.theme?' '+f.theme:''}${f.rating?' · '+f.rating:''} · ${fmtM(f.budget)} · ${qtxt}${f.dist==='self'?' · self-dist':''}</div>
+      <div class="prog" style="margin-top:4px"><div class="prog-f" style="width:${prog}%;background:#7F77DD"></div></div>
+      <div style="font-size:10px;color:var(--color-text-secondary)">${timeTxt}</div>
+    </div>
+    <button class="btn btn-sm btn-r" onclick="cancelFilm(${f.id})" title="Cancel (50% refund)"><i class="ti ti-x"></i></button>
+  </div>`;
+}
+
+function renderDevelop(){
+  const s=season();
+  document.getElementById('d-genre-guide').innerHTML=
+    '<div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:8px">Calendar season bias only — true demand stays foggy until release.</div>'+
+    '<div class="g3" style="gap:6px">'+
+    GENRES.map(g=>{
+      const mod=s.mods[g]||1;const pct=Math.round((mod-1)*100);
+      const cls=mod>1.1?'green':mod<0.9?'red':'';
+      return`<div style="padding:7px;border-radius:8px;background:${GENRE_BG[g]};border:0.5px solid ${GENRE_FG[g]}33">
+        <div style="font-size:16px">${GENRE_ICO[g]}</div>
+        <div style="font-size:12px;font-weight:500;color:${GENRE_FG[g]}">${g}</div>
+        <div style="font-size:10px" class="${cls}">${pct>0?'+':''}${pct}% season bias</div>
+      </div>`;
+    }).join('')+'</div>';
+
+  const tg=document.getElementById('d-theme-guide');
+  if(tg){
+    const hasWriters=G.upgrades.find(u=>u.id==='writers'&&u.owned);
+    const unlocked=availableThemes();
+    const total=THEMES.length;
+    const locked=total-unlocked.length;
+    tg.innerHTML=
+      '<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">'+
+      unlocked.map(t=>`<span class="pill" style="background:var(--color-background-secondary);color:var(--color-text-primary)">${t}</span>`).join('')+
+      '</div>'+
+      (hasWriters
+        ? '<div style="font-size:11px;color:var(--color-text-secondary)">✍️ Writers\' Room active — full theme library unlocked.</div>'
+        : `<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+             <button class="btn btn-sm ${locked>0?'btn-p':''}" onclick="discoverThemes()" ${locked>0?'':'disabled'}>${locked>0?'Research 2 themes — 30 RP':'All themes unlocked'}</button>
+             <span style="font-size:11px;color:var(--color-text-secondary)">${unlocked.length}/${total} themes known${locked>0?' · '+locked+' locked':''}</span>
+           </div>`);
+  }
+
+  const dl=document.getElementById('d-prod-list');
+  if(!G.films.length){dl.innerHTML='<p style="font-size:13px;color:var(--color-text-secondary)">No active projects.</p>'}
+  else dl.innerHTML=G.films.map(f=>filmProdRow(f)).join('');
+}
+
+function discoverThemes(){
+  if(G.upgrades.find(u=>u.id==='writers'&&u.owned)){toast('Writers\' Room already unlocks all themes.','i');return}
+  const locked=THEMES.map(t=>t.name).filter(n=>!(G.themes||[]).includes(n));
+  if(!locked.length){toast('All themes already discovered!','i');return}
+  if((G.rp||0)<30){toast('Need 30 Research Points to unlock new themes.','b');return}
+  G.rp-=30;
+  const picks=locked.sort(()=>Math.random()-.5).slice(0,2);
+  G.themes=(G.themes||[]).concat(picks);
+  log('Developed new themes: '+picks.join(', '),'blue');
+  toast('✍️ New themes discovered: '+picks.join(', '),'g');
+  updateHUD();renderDevelop();saveGame();
+}
+
+function renderTalent(){
+  const rEl=document.getElementById('t-roster-list');
+  const total_sal=G.roster.reduce((s,t)=>s+t.sal,0);
+  document.getElementById('t-roster-meta').textContent=G.roster.length+' on payroll · '+fmtM(total_sal)+'/qtr';
+  if(!G.roster.length){rEl.innerHTML='<p style="font-size:13px;color:var(--color-text-secondary)">No talent under contract. Sign someone from the market.</p>'}
+  else rEl.innerHTML=G.roster.map(t=>`<div class="row">
+    <div class="ava" style="background:${t.bg};color:${t.fg}">${t.ini}</div>
+    <div style="flex:1;min-width:0">
+      <div style="font-size:13px;font-weight:500">${t.star?'⭐ ':''}${t.name} <span class="pill" style="background:${t.bg};color:${t.fg}">${t.role}</span>${t.genre?` <span class="pill" style="background:${GENRE_BG[t.genre]};color:${GENRE_FG[t.genre]}">${t.genre}</span>`:''}</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">Quality: ${t.q} · ${fmt(t.sal)}/qtr${t.busy?' · <span style="color:#185FA5">On project</span>':''}</div>
+    </div>
+    <button class="btn btn-sm btn-r" onclick="fireTalent('${t.name}')"><i class="ti ti-x"></i></button>
+  </div>`).join('');
+
+  document.getElementById('t-market').innerHTML=G.market.map(t=>`<div class="card" style="padding:10px;margin:0">
+    <div style="display:flex;align-items:center;gap:7px;margin-bottom:6px">
+      <div class="ava" style="background:${t.bg};color:${t.fg};width:30px;height:30px;font-size:10px">${t.ini}</div>
+      <div><div style="font-size:12px;font-weight:500">${t.star?'⭐ ':''}${t.name}</div><div style="font-size:10px;color:var(--color-text-secondary)">${t.role}${t.genre?' · '+t.genre:''}</div></div>
+    </div>
+    <div style="display:flex;gap:3px;flex-wrap:wrap;margin-bottom:6px">
+      <span style="font-size:10px;padding:2px 5px;border-radius:4px;background:var(--color-background-secondary);color:var(--color-text-secondary)">Q: ${t.q}</span>
+      ${t.boost.q?`<span style="font-size:10px;padding:2px 5px;border-radius:4px;background:var(--color-background-secondary);color:var(--color-text-secondary)">Quality +${t.boost.q}</span>`:''}
+      ${t.boost.gross?`<span style="font-size:10px;padding:2px 5px;border-radius:4px;background:var(--color-background-secondary);color:var(--color-text-secondary)">Gross +${Math.round(t.boost.gross*100)}%</span>`:''}
+    </div>
+    <div style="font-size:11px;color:#0F6E56;font-weight:500;margin-bottom:6px">Sign: ${fmt(t.cost)} · ${fmt(t.sal)}/qtr</div>
+    <button class="btn btn-sm btn-g" style="width:100%" onclick="hireTalent('${t.name}')">Sign contract</button>
+  </div>`).join('');
+}
+
+function hireTalent(name){
+  const t=G.market.find(x=>x.name===name);
+  if(!t)return;
+  if(G.cash<t.cost){toast('Not enough cash to sign '+t.name+'!','b');return}
+  G.cash-=t.cost;G.roster.push({...t,busy:false});
+  G.market=G.market.filter(x=>x.name!==name);
+  log('Signed '+t.name+' ('+t.role+') for '+fmt(t.cost),'blue');
+  toast('✅ '+t.name+' signed!','g');
+  updateHUD();renderTalent();saveGame();
+}
+function fireTalent(name){
+  G.roster=G.roster.filter(t=>t.name!==name);
+  toast(name+' released from contract.','i');
+  log('Released '+name+' from contract.');
+  updateHUD();renderTalent();saveGame();
+}
+
+function cancelFilm(id){
+  const f=G.films.find(x=>x.id===id);
+  if(!f)return;
+  const refund=Math.round(f.budget*0.5);
+  G.cash+=refund;
+  (f.attached||[]).forEach(n=>{const t=G.roster.find(x=>x.name===n);if(t)t.busy=false;});
+  if(window.Realism?.removeFilm)Realism.removeFilm(G,x=>x.id===id);
+  else{G.films=G.films.filter(x=>x.id!==id);G.pipeline=G.films;}
+  log('Cancelled "'+f.title+'". Refund: '+fmtM(refund),'red');
+  toast('🛑 "'+f.title+'" cancelled. Refund: '+fmtM(refund),'i');
+  updateAll();saveGame();
+}
+
+function renderStudio(){
+  const cats=['Research','Production','Post-Production','Business','Ancillaries'];
+  const catRow=u=>`<div class="irow">
+    <div>
+      <div style="font-size:13px;font-weight:500"><i class="ti ${u.icon}" style="font-size:13px;margin-right:4px"></i>${u.name}${u.owned?' <span style="color:#1D9E75;font-size:10px">✓ active</span>':''}</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">${u.desc}</div>
+    </div>
+    <button class="btn btn-sm ${u.owned?'':'btn-p'}" onclick="buyUpgrade('${u.id}')" ${u.owned?'disabled':''}>${u.owned?'Owned':(u.rp?u.cost+' RP':fmt(u.cost))}</button>
+  </div>`;
+  document.getElementById('s-upgrades').innerHTML=cats.map(cat=>{
+    const items=G.upgrades.filter(u=>(u.cat||'Business')===cat);
+    if(!items.length)return '';
+    return `<div style="font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;color:var(--color-text-secondary);margin:10px 0 4px">${cat}</div>`+items.map(catRow).join('');
+  }).join('');
+
+  document.getElementById('s-mkt').innerHTML=MKT.map(m=>`<div class="irow">
+    <div>
+      <div style="font-size:13px;font-weight:500"><i class="ti ${m.icon}" style="font-size:13px;margin-right:4px"></i>${m.name}</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">${m.desc}</div>
+    </div>
+    <button class="btn btn-sm" onclick="buyMkt('${m.id}')">${fmt(m.cost)}</button>
+  </div>`).join('');
+
+  const lb=document.getElementById('loan-btn');
+  lb.disabled=G.loans.length>=2;
+  lb.textContent=G.loans.length>=2?'Max 2 loans':'Apply for loan (risk)';
+  lb.onclick=function(){applyForLoan();};
+
+  let inv=document.getElementById('invest-panel');
+  if(!inv){
+    inv=document.createElement('div');
+    inv.id='invest-panel';
+    inv.style.marginTop='12px';
+    document.getElementById('s-upgrades')?.parentElement?.appendChild(inv);
+  }
+  inv.innerHTML=`<div style="font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;color:var(--color-text-secondary);margin:10px 0 4px">Outside investments</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+      <button class="btn btn-sm" onclick="doInvest('savings')">Savings $100k</button>
+      <button class="btn btn-sm" onclick="doInvest('index')">Index $100k</button>
+      <button class="btn btn-sm" onclick="doInvest('realty')">Realty $100k</button>
+      <button class="btn btn-sm" onclick="doInvest('venture')">Venture $200k</button>
+      <button class="btn btn-sm" onclick="doInvest('art')">Art $200k</button>
+    </div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:6px">Holdings · Inflation ×${(window.Realism?Realism.currentInflationIndex(G):1).toFixed(2)}</div>
+    ${(G.portfolio||[]).length
+      ? (G.portfolio||[]).map((p,i)=>`<div class="irow"><span class="ikey">${p.type} · ${fmtM(p.amount)}${p.year?' · since '+p.year:''}</span><button class="btn btn-sm" onclick="doLiquidate(${i})">Liquidate</button></div>`).join('')
+      : '<div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:8px">No open positions.</div>'}
+    <div style="margin-top:10px;font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;color:var(--color-text-secondary)">Staff roles</div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin:4px 0 8px">${['sales','analyst','marketer','executive'].map(r=>`${r}: ${(G.staffRoles&&G.staffRoles[r])?'on':'—'}`).join(' · ')}</div>
+    <div style="margin-top:10px;font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;color:var(--color-text-secondary)">Rival slate</div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin:4px 0 8px">${(G.rivals||[]).map(r=>r.name+': '+(r.slate||[]).map(s=>s.genre+' ('+s.size+')').join(', ')).join('<br>')||'No rivals yet'}</div>
+    <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn btn-sm" onclick="nameSuccessorUI()">Name successor</button>
+      <button class="btn btn-sm" onclick="mentorHeir()">Mentor heir ($50k)</button>
+      <button class="btn btn-sm btn-r" onclick="retireCEO()">Retire</button>
+      <button class="btn btn-sm" onclick="setGfxPreset('medium')">GFX Med</button>
+    </div>`;
+}
+
+function buyUpgrade(id){
+  const u=G.upgrades.find(x=>x.id===id);
+  if(!u||u.owned)return;
+  if(u.rp){
+    if((G.rp||0)<u.cost){toast('Need '+u.cost+' Research Points for '+u.name,'b');return}
+    G.rp-=u.cost;
+  }else{
+    if(G.cash<u.cost){toast('Not enough cash for '+u.name,'b');return}
+    G.cash-=u.cost;
+  }
+  u.owned=true;
+  if(u.id==='vfx'&&G.unlockedSizes)G.unlockedSizes.large=true;
+  if(u.id==='marketing'&&G.unlockedSizes)G.unlockedSizes.blockbuster=true;
+  if(u.id==='analytics'&&window.Realism)Realism.unlockStaffRole(G,'analyst');
+  if(u.id==='pr'&&window.Realism)Realism.unlockStaffRole(G,'marketer');
+  if(u.id==='recruit'&&window.Realism)Realism.unlockStaffRole(G,'sales');
+  if(u.id==='sound'&&window.Realism)Realism.unlockStaffRole(G,'executive');
+  log('Researched: '+u.name,'green');
+  toast('🏗 '+u.name+' unlocked!','a');
+  if(!document.getElementById('gl-panel')?.classList.contains('hide')){
+    populatePremiums();
+    glBudgetChange();
+  }
+  updateHUD();renderStudio();saveGame();
+}
+function buyMkt(id){
+  const m=MKT.find(x=>x.id===id);
+  if(!m)return;
+  if(G.cash<m.cost){toast('Not enough cash for '+m.name,'b');return}
+  G.cash-=m.cost;G.activeMkt.push(id);
+  if(id==='social'){G.rep=clamp(G.rep+7,0,100);toast('📣 Social buzz launched! Rep +7','g')}
+  else if(id==='awards'){G.awardsCampaignYear=G.year||1970;toast('🏆 Awards campaign active this year','g')}
+  else toast('📢 '+m.name+' launched!','g');
+  log('Marketing: '+m.name,'blue');
+  updateHUD();saveGame();
+}
+/** Implemented in integrate.js (risk loan). */
+function takeLoan(){return window.takeLoan?.();}
+
+function renderAwards(){
+  document.getElementById('a-trophies').innerHTML=G.awards.length?
+    G.awards.map(a=>`<span class="award"><i class="ti ti-trophy" style="font-size:11px"></i>${a.cat} — ${a.film} (Y${a.yr})</span>`).join(''):
+    '<p style="font-size:13px;color:var(--color-text-secondary)">No awards yet. Produce high-quality films!</p>';
+
+  const lb=document.getElementById('a-lb');
+  if(!G.released.length){lb.innerHTML='<p style="font-size:13px;color:var(--color-text-secondary)">No films released yet.</p>'}
+  else{
+    const s=[...G.released].sort((a,b)=>b.gross-a.gross);
+    lb.innerHTML=s.map((f,i)=>`<div class="irow">
+      <span class="ikey">${i+1}. ${GENRE_ICO[f.genre]} ${f.title} <span class="pill" style="background:${GENRE_BG[f.genre]};color:${GENRE_FG[f.genre]}">${f.genre}</span></span>
+      <span class="ival">${fmtM(f.gross)}</span>
+    </div>`).join('');
+  }
+}
+
+function availableThemes(){
+  return G.upgrades.find(u=>u.id==='writers'&&u.owned)?THEMES.map(t=>t.name):(G.themes||[]);
+}
+function populateThemes(){
+  const el=document.getElementById('gl-theme');
+  const list=availableThemes();
+  el.innerHTML=list.map(t=>`<option value="${t}">${t}</option>`).join('');
+}
+function populateRatings(){
+  const el=document.getElementById('gl-rating');
+  el.innerHTML=RATINGS.map((r,i)=>`<option value="${r.name}"${i===2?' selected':''}>${r.name}</option>`).join('');
+}
+function populateGenres(){
+  const el=document.getElementById('gl-genre');
+  const cur=el.value;
+  el.innerHTML=GENRES.map(g=>`<option value="${g}">${GENRE_ICO[g]} ${g}</option>`).join('');
+  if(cur&&GENRES.includes(cur))el.value=cur;
+}
+function glRatingChange(){glQualityPreview();}
+
+function openGL(){
+  if(G.films.length>=3){toast('Already at max 3 films in production.','b');return}
+  if(typeof window.pauseGameClock==='function')window.pauseGameClock();
+  currentView='develop';
+  show('panel-sheet');
+  hide('tab-overview');hide('tab-talent');hide('tab-studio');hide('tab-awards');
+  hide('tab-develop');
+  show('gl-panel');
+  setDockActive('develop');
+  const fab=document.getElementById('fab-new-movie');
+  if(fab)fab.classList.add('hide');
+  const titleEl=document.getElementById('panel-sheet-title');
+  if(titleEl)titleEl.textContent='Greenlight';
+  document.getElementById('gl-title').value=rTitle();
+  // Default budget the player can actually afford (small tier when possible)
+  const maxM=typeof maxUnlockedBudgetM==='function'?maxUnlockedBudgetM():8;
+  const affordM=Math.max(1,Math.floor((G.cash||0)/1e6));
+  const defM=Math.min(maxM,Math.max(1,Math.min(3,affordM)));
+  document.getElementById('gl-budget').value=defM;
+  document.getElementById('gl-sequel').value='';
+  document.getElementById('gl-dist').value='third';
+  populateGenres();
+  populateThemes();
+  populateRatings();
+  populatePremiums();
+  glAllocChange();
+  glBudgetChange();glGenreChange();
+  populateSequels();
+  populateTalentSelects();
+  if(affordM<3)toast('Cash is tight — budget capped to $'+defM+'M. Loan or smaller slate.','i',4500);
+}
+function closeGL(){
+  hide('gl-panel');
+  goTab('develop');
+}
+
+function populateSequels(){
+  const el=document.getElementById('gl-sequel');
+  const hits=G.released.filter(f=>f.gross>f.budget).sort((a,b)=>b.gross-a.gross);
+  el.innerHTML='<option value="">— Original IP —</option>'+hits.map(f=>`<option value="${f.title}">${f.title} (${f.genre}, ${fmtM(f.gross)})</option>`).join('');
+}
+
+function glSequelChange(){
+  const title=document.getElementById('gl-sequel').value;
+  if(!title){glGenreChange();glQualityPreview();return;}
+  const orig=G.released.find(f=>f.title===title);
+  if(!orig)return;
+  document.getElementById('gl-genre').value=orig.genre;
+  if(orig.theme){
+    const themeEl=document.getElementById('gl-theme');
+    const has=[...themeEl.options].some(o=>o.value===orig.theme);
+    if(has)themeEl.value=orig.theme;
+  }
+  const root=orig.franchise||orig.title;
+  const inst=franchiseCount(root)+1;
+  const base=root.replace(/\s+(II|III|IV|V|VI|VII|VIII|IX|X)$/,'');
+  document.getElementById('gl-title').value=base+' '+roman(inst);
+  glQualityPreview();
+}
+
+function populateTalentSelects(){
+  const avail=G.roster.filter(t=>!t.busy);
+  const fill=(id,role)=>{
+    const el=document.getElementById(id);
+    const matches=avail.filter(t=>t.role===role);
+    el.innerHTML='<option value="">— None —</option>'+matches.map(t=>`<option value="${t.name}">${t.name} (Q:${t.q}${t.boost.gross?' +gross':''})</option>`).join('');
+  };
+  fill('gl-dir','Director');fill('gl-actor','Actor');
+  fill('gl-writer','Writer');fill('gl-producer','Producer');
+  glQualityPreview();
+}
+
+const ROMAN=['','','II','III','IV','V','VI','VII','VIII','IX','X'];
+function roman(n){return ROMAN[n]||('#'+n);}
+function movieSize(m){
+  if(window.Realism?.budgetMToSize)return Realism.budgetMToSize(m);
+  if(m<=3)return 'small';
+  if(m<=8)return 'medium';
+  if(m<=20)return 'large';
+  return 'blockbuster';
+}
+function movieSizeLabel(m){
+  const s=movieSize(m);
+  return s.charAt(0).toUpperCase()+s.slice(1);
+}
+function maxUnlockedBudgetM(){
+  if(window.Realism?.maxUnlockedBudgetM)return Realism.maxUnlockedBudgetM(G);
+  const u=G.unlockedSizes||{small:true,medium:true};
+  if(u.blockbuster===true)return 45;
+  if(u.large===true)return 20;
+  if(u.medium===true)return 8;
+  return 3;
+}
+function glAllocChange(){
+  const w=+document.getElementById('gl-alloc-write').value;
+  const s=+document.getElementById('gl-alloc-shoot').value;
+  const p=+document.getElementById('gl-alloc-post').value;
+  const m=+document.getElementById('gl-alloc-mkt').value;
+  const sum=w+s+p+m;
+  const el=document.getElementById('gl-alloc-sum');
+  if(el){
+    el.textContent='Alloc sums to '+sum+'%'+(sum===100?'':' — will normalize on greenlight');
+    el.style.color=sum===100?'var(--color-text-secondary)':'#C0453B';
+  }
+}
+function populatePremiums(){
+  const box=document.getElementById('gl-premium');
+  if(!box)return;
+  const feats=(window.Realism&&Realism.PREMIUM_FEATURES)||[];
+  if(G.upgrades?.find(u=>u.id==='vfx'&&u.owned)){
+    G.features=G.features||[];
+    ['vfx_suite','stunts'].forEach(id=>{if(!G.features.includes(id))G.features.push(id);});
+  }
+  if(G.upgrades?.find(u=>u.id==='sound'&&u.owned)){
+    G.features=G.features||[];
+    if(!G.features.includes('composer'))G.features.push('composer');
+  }
+  if(G.upgrades?.find(u=>u.id==='marketing'&&u.owned)){
+    G.features=G.features||[];
+    ['imax','creature'].forEach(id=>{if(!G.features.includes(id))G.features.push(id);});
+  }
+  const list=G.features||[];
+  if(!feats.length){box.innerHTML='';return;}
+  const unlockHint={
+    stunts:'VFX Stage',
+    vfx_suite:'VFX Stage',
+    composer:'Sound Stage',
+    imax:'Marketing Dept',
+    creature:'Marketing Dept',
+  };
+  box.innerHTML='<div style="font-weight:600;margin-bottom:4px">Premium features</div>'+
+    feats.map(f=>{
+      const on=list.includes(f.id);
+      const via=unlockHint[f.id]||'Research';
+      return `<label style="display:inline-flex;align-items:center;gap:4px;margin:2px 8px 2px 0;opacity:${on?1:0.45}" title="${on?'Ready':('Unlock via '+via)}">
+        <input type="checkbox" data-premium="${f.id}" ${on?'':'disabled'}>
+        ${f.id}${on?'':(' (locked — '+via+')')} (+${f.quality}Q · ${Math.round(f.costPct*100)}%)
+      </label>`;
+    }).join('');
+}
+function franchiseCount(root){
+  if(!root)return 0;
+  let n=0;
+  G.released.forEach(f=>{if((f.franchise||f.title)===root)n++;});
+  G.films.forEach(f=>{if((f.franchise||null)===root)n++;});
+  return n;
+}
+function seqEffects(inst){
+  if(inst<=1)return{q:0,gross:0,inst:1};
+  return{q:Math.max(0,10-(inst-2)*3),gross:Math.max(-0.35,0.25-(inst-2)*0.13),inst};
+}
+
+function glBudgetChange(){
+  const maxM=maxUnlockedBudgetM();
+  const slider=document.getElementById('gl-budget');
+  if(+slider.value>maxM)slider.value=maxM;
+  slider.max=maxM;
+  const v=+slider.value;
+  const pp=G.upgrades.find(u=>u.id==='postprod'&&u.owned);
+  const q=window.Realism?.estimateQuartersForBudgetM
+    ? Realism.estimateQuartersForBudgetM(v,!!pp)
+    : (movieSize(v)==='small'?2:movieSize(v)==='medium'?3:movieSize(v)==='large'?4:5)-(pp?1:0);
+  document.getElementById('gl-bval').textContent='$'+v+'M';
+  const sizeEl=document.getElementById('gl-size-lbl');
+  if(sizeEl)sizeEl.textContent=movieSizeLabel(v);
+  document.getElementById('gl-qval').textContent='~'+Math.max(1,q)+' qtrs';
+  const ladder=document.getElementById('gl-size-ladder');
+  if(ladder){
+    const u=G.unlockedSizes||{small:true,medium:true};
+    const S=window.Realism?.FILM_SIZES;
+    const sm=S?.small?.budgetM??3,md=S?.medium?.budgetM??8,lg=S?.large?.budgetM??20,bb=S?.blockbuster?.budgetM??45;
+    ladder.innerHTML=
+      `<span style="opacity:${u.small?1:0.35}">Small $${sm}M</span>`+
+      `<span style="opacity:${u.medium?1:0.35}">Med $${md}M</span>`+
+      `<span style="opacity:${u.large?1:0.35}">Large $${lg}M${u.large?'':'🔒'}</span>`+
+      `<span style="opacity:${u.blockbuster?1:0.35}">BB $${bb}M${u.blockbuster?'':'🔒'}</span>`;
+  }
+  glQualityPreview();
+}
+
+function glGenreChange(){
+  const g=document.getElementById('gl-genre').value;
+  const s=season();const mod=s.mods[g]||1;const pct=Math.round((mod-1)*100);
+  const arrow=mod>1.1?'📈 Hot this season!':mod<0.9?'📉 Weak this season':'➡️ Neutral season';
+  document.getElementById('gl-genre-hint').innerHTML=`${GENRE_ICO[g]} <strong>${g}</strong> — ${arrow} (${pct>0?'+':''}${pct}% box office this ${s.name})`;
+  glQualityPreview();
+}
+
+function glQualityPreview(){
+  const v=+document.getElementById('gl-budget').value;
+  const genre=document.getElementById('gl-genre').value;
+  const theme=document.getElementById('gl-theme').value;
+  const rating=RATINGS.find(r=>r.name===document.getElementById('gl-rating').value)||RATINGS[2];
+  let q=40+v*1.4;
+  const dName=document.getElementById('gl-dir').value;
+  const aName=document.getElementById('gl-actor').value;
+  const wName=document.getElementById('gl-writer').value;
+  const pName=document.getElementById('gl-producer').value;
+  [dName,aName,wName,pName].filter(Boolean).forEach(n=>{
+    const t=G.roster.find(x=>x.name===n);
+    if(t&&t.boost.q){let b=t.boost.q;if(t.genre===genre)b=Math.round(b*1.3);q+=b;}
+  });
+  if(G.upgrades.find(u=>u.id==='sound'&&u.owned))q+=6;
+  if(G.upgrades.find(u=>u.id==='script'&&u.owned))q+=4;
+  if(G.upgrades.find(u=>u.id==='vfx'&&u.owned)&&(genre==='Sci-Fi'||genre==='Action'))q+=10;
+  q+=rating.quality;
+  const syn=themeSynergy(theme,genre);
+  q+=syn*5;
+  const seqTitle=document.getElementById('gl-sequel').value;
+  let inst=1,fatigue=0;
+  if(seqTitle){
+    const orig=G.released.find(f=>f.title===seqTitle);
+    const root=orig?(orig.franchise||orig.title):null;
+    inst=franchiseCount(root)+1;
+    const se=seqEffects(inst);q+=se.q;fatigue=se.gross;
+  }
+  q=clamp(Math.round(q),20,100);
+  const criticEst=clamp(q/10+(rating.name==='R'?0.6:0)+syn*0.35,1,10);
+  const audEst=clamp(q/11+syn*0.3+(rating.reach-0.9)*3,1,10);
+  const qClass=q>=75?'green':q>=55?'amber':'red';
+  const qLabel=q>=80?'Excellent':q>=70?'Good':q>=55?'Average':'Below average';
+  const synTxt=syn===2?' · <span class="green">🎯 Perfect theme match (+10)</span>':syn===1?' · <span class="green">Good theme match (+5)</span>':' · <span class="amber">Theme mismatch</span>';
+  let seqTxt='';
+  if(seqTitle){
+    seqTxt=inst>=4?` · <span class="red">⚠️ Franchise fatigue — installment ${inst}, ${Math.round(fatigue*100)}% gross</span>`:` · <span class="blue">🔗 Installment ${inst} (+${Math.round(fatigue*100)}% gross)</span>`;
+  }
+  document.getElementById('gl-quality-preview').innerHTML=
+    `Est. quality <strong class="${qClass}" style="font-size:14px">${q}</strong>/100 — ${qLabel}${synTxt}${seqTxt}<br>`+
+    `Projected 🥑 Critic <strong>${criticEst.toFixed(1)}</strong> · 🥤 Audience <strong>${audEst.toFixed(1)}</strong> · ${rating.name} (${rating.tip}). ${q>=70?'Awards eligible!':'Below 70: no award eligibility.'}`;
+}
+
+/** Implemented in integrate.js (realism greenlight). */
+function doGreenlight(){return window.doGreenlight?.();}
+
+/** Implemented in integrate.js (clock week advance). */
+function endQuarter(){return window.endQuarter?.();}
+
+function releaseFilm(f){
+  const s=season();
+  const rating=RATINGS.find(r=>r.name===f.rating)||RATINGS[2];
+  let gross,net,distCut,cutRate,reachNote,rivalClash=false;
+  if(window.Realism&&Realism.estimateBoxOffice){
+    const bo=Realism.estimateBoxOffice(f,G,{
+      seasonMod:s.mods[f.genre]||1,
+      ratingReach:rating.reach||1,
+    });
+    gross=bo.gross;net=bo.net;distCut=bo.distCut;cutRate=bo.cutRate;reachNote=bo.reachNote||'';
+    rivalClash=!!bo.rivalClash;
+  }else{
+    let base=f.budget*(0.5+(f.quality/100)*2.8);
+    base*=f.grossMult||1;
+    base*=0.7+(G.rep/100)*0.6;
+    base*=s.mods[f.genre]||1;
+    if(f.seasonReroll)base*=0.85+Math.random()*0.4;
+    base*=rating.reach;
+    if(f.dist==='self')base*=0.85;
+    base*=0.8+Math.random()*.4;
+    if(G.marketHidden&&G.marketHidden[f.genre])base*=G.marketHidden[f.genre];
+    reachNote='';
+    if(f.dist==='self'){
+      const reach=0.72+Math.random()*0.2;
+      base*=reach;
+      reachNote=' · reach '+(Math.round(reach*100))+'%';
+    }
+    gross=Math.round(base);
+    cutRate=f.dist==='self'?0:(0.20+Math.random()*0.15);
+    distCut=f.dist==='self'?0:Math.round(gross*cutRate);
+    net=gross-distCut;
+  }
+
+  const syn=themeSynergy(f.theme,f.genre);
+  const critic=clamp(f.quality/10+(rating.name==='R'?0.6:0)+syn*0.35+(Math.random()*1.2-0.6),1,10);
+  const audience=clamp(f.quality/11+syn*0.3+(rating.reach-0.9)*3+(gross>f.budget*1.5?0.8:0)+(Math.random()*1.2-0.6),1,10);
+  f.critic=Math.round(critic*10)/10;
+  f.audience=Math.round(audience*10)/10;
+  f.classic=f.critic>=8.5;
+  f.cult=f.audience>=8.5;
+  f.gross=gross;f.net=net;f.distCut=distCut;f.distCutRate=cutRate;f.releasedQ=G.totalQ;f.releasedYear=G.year||1970;f.awards=[];
+
+  const qd=f.quality-60;
+  G.rep=clamp(G.rep+qd*.15,0,100);
+  if(f.classic){G.rep=clamp(G.rep+4,0,100);log('"'+f.title+'" is hailed a CLASSIC! 🥑','green');toast('🥑 "'+f.title+'" is an instant classic!','a',5000);}
+  if(f.cult){G.rep=clamp(G.rep+3,0,100);log('"'+f.title+'" becomes a CULT hit! 🥤','green');toast('🥤 "'+f.title+'" is a cult favorite!','a',5000);}
+  G.released.push(f);G.totalGross+=gross;G.cash+=net;G.lastRev+=net;
+  G.yearProfitAccum=(G.yearProfitAccum||0)+Math.max(0,net);
+  if(rivalClash)toast('⚔ Rival clash diluted the opening.','b');
+  const rpGain=8+Math.round(f.quality/20)+(f.classic?5:0)+(f.cult?3:0);
+  G.rp=(G.rp||0)+rpGain;
+  const roi=Math.round((net/f.budget-1)*100);
+  const typ=net>f.budget*1.5?'a':net>f.budget?'g':'b';
+  const cutTxt=distCut?(' · dist cut '+(Math.round(cutRate*100))+'% '+fmtM(distCut)):(' · self-dist'+reachNote);
+  log('"'+f.title+'" released! '+fmtM(gross)+' box office'+cutTxt+' · 🥑'+f.critic+' 🥤'+f.audience+' (ROI '+(roi>0?'+':'')+roi+'%) '+s.icon,net>f.budget?'green':'red');
+  toast(GENRE_ICO[f.genre]+' "'+f.title+'" — '+fmtM(gross)+' · 🥑'+f.critic+' 🥤'+f.audience+' · ROI '+(roi>0?'+':'')+roi+'%',typ,5000);
+  if(window.Realism&&Realism.writeMetaTip){
+    const tip=gross>f.budget*1.4?'hot':gross>f.budget?'warm':'cool';
+    Realism.writeMetaTip(f.genre,tip);
+  }
+}
+
+function endGame(reason){
+  hide('game-screen');show('end-screen');
+  const score=calcScore();
+  const oldHi=getHiScore();
+  const newBest=score>oldHi;
+  setHiScore(score);
+  clearSave();
+  const grades=[{min:3000,t:'Hollywood Legend',i:'👑'},{min:2000,t:'Studio Mogul',i:'🏆'},{min:1000,t:'Studio Head',i:'🎬'},{min:500,t:'Rising Producer',i:'🌟'},{min:0,t:'Struggling Indie',i:'🎞'}];
+  const g=grades.find(x=>score>=x.min)||grades[grades.length-1];
+  document.getElementById('e-icon').textContent=reason==='bankruptcy'?'📉':g.i;
+  document.getElementById('e-title').textContent=reason==='bankruptcy'?'Studio bankrupt':g.t;
+  document.getElementById('e-sub').textContent=reason==='bankruptcy'?G.name+' ran out of money after '+G.totalQ+' quarters.':G.name+' completed its 5-year run — score: '+score.toLocaleString()+(newBest?' · 🏆 New best!':'');
+  const classics=G.released.filter(f=>f.classic).length;
+  const cults=G.released.filter(f=>f.cult).length;
+  const bestCritic=G.released.reduce((m,f)=>Math.max(m,f.critic||0),0);
+  document.getElementById('e-stats').innerHTML=`
+    <div class="irow"><span class="ikey">Final cash</span><span class="ival ${G.cash>=0?'green':'red'}">${fmtM(G.cash)}</span></div>
+    <div class="irow"><span class="ikey">Total gross</span><span class="ival">${fmtM(G.totalGross)}</span></div>
+    <div class="irow"><span class="ikey">Reputation</span><span class="ival blue">${Math.round(G.rep)}/100</span></div>
+    <div class="irow"><span class="ikey">Films released</span><span class="ival">${G.released.length}</span></div>
+    <div class="irow"><span class="ikey">Classics 🥑 / Cult 🥤</span><span class="ival">${classics} / ${cults}</span></div>
+    <div class="irow"><span class="ikey">Best critic score</span><span class="ival">${bestCritic?bestCritic.toFixed(1):'–'}/10</span></div>
+    <div class="irow"><span class="ikey">Awards</span><span class="ival">${G.awards.length}</span></div>
+    <div class="irow"><span class="ikey">Score</span><span class="ival" style="color:#7F77DD;font-size:18px">${score.toLocaleString()}</span></div>`;
+  document.getElementById('e-awards').innerHTML=G.awards.map(a=>`<span class="award"><i class="ti ti-trophy" style="font-size:11px"></i>${a.cat} — ${a.film}</span>`).join('');
+  const top=[...G.released].sort((a,b)=>b.gross-a.gross).slice(0,5);
+  document.getElementById('e-posters').innerHTML=top.map(f=>`<div class="poster" style="background:${GENRE_BG[f.genre]};width:56px;height:78px"><div class="poster-ico" style="font-size:22px">${GENRE_ICO[f.genre]}</div><div class="poster-lbl" style="color:${GENRE_FG[f.genre]}">${f.title}</div></div>`).join('');
+}
+
+var three=null;
+/** Fallback only — integrate.js replaces window.init3D with modular office. */
+function init3D(){
+  if(window.three)return;
+  if(typeof window.OfficeGfx==='undefined'){
+    console.warn('[ET] Office modules not ready; retrying…');
+    setTimeout(function(){ if(typeof window.init3D==='function') window.init3D(); }, 80);
+    return;
+  }
+  // Prefer patched builder on window (set by integrate.js)
+  if(window.init3D && window.init3D !== init3D){
+    window.init3D();
+    return;
+  }
+  console.error('[ET] Modular office failed to load.');
+}
+function refresh3D(){
+  if(!window.three && !three)return;
+  const T=window.three||three;
+  const setText=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
+  const setWidth=(id,pct)=>{const el=document.getElementById(id);if(el)el.style.width=pct+'%';};
+
+  // Top HUD
+  setText('off-keep-studio',G.name||'');
+  setText('off-stat-cash',fmtM(G.cash||0));
+  setText('off-stat-rep',(window.Realism?Realism.repToPrestige(G.rep):(G.rep||0)/20).toFixed(1));
+  setText('off-stat-rp',Math.round(G.rp||0)+'');
+
+  // Date label (calendar pill like the real game)
+  const monthNames=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const mo=monthNames[(G.month||1)-1]||'—';
+  const day=String(G.day||1).padStart(2,'0');
+  const dateEl=document.getElementById('off-date');
+  if(dateEl)dateEl.innerHTML=mo+'<br>'+day;
+
+  // Live Keep rolling checklist — real first-session loop
+  const keep=document.getElementById('off-keep-list');
+  if(keep){
+    const clockOn=!!G.clockRunning;
+    const cared=(G.crashCount||0)===0&&(G.body?.energy??100)>30;
+    const greenlit=(G.films||[]).length>0||(G.released||[]).length>0;
+    const released=(G.released||[]).length>0;
+    const items=[
+      {done:clockOn||released||greenlit, text: clockOn?'Clock running.':'Unpause the clock when ready.', fail:false},
+      {done:cared||released, text:'Keep energy up — Sleep before you crash.', fail:(G.crashCount||0)>0},
+      {done:greenlit, text:'Greenlight a film (budget + alloc).', fail:false},
+      {done:released, text:'Finish post → release modal (commit, then reveal).', fail:false},
+      {done:(G.released||[]).some(f=>(f.quality||0)>=70), text:'Optional: land a 70+ quality release.', fail:false, optional:true},
+    ];
+    keep.innerHTML=items.map(it=>{
+      const cls='off-keep-item'+(it.done?' done':'')+(it.fail?' fail':'');
+      const mark=it.done?'✓':(it.fail?'✕':'');
+      const opt=it.optional?'<div class="off-keep-opt">Optional</div>':'';
+      return opt+`<div class="${cls}"><div class="chk">${mark}</div><div>${it.text}</div></div>`;
+    }).join('');
+  }
+  const tip=document.getElementById('off-season-tip');
+  if(tip){
+    const s=season();
+    tip.textContent=(s.icon||'')+' '+s.name+' — '+s.tip;
+  }
+
+  // Ancillaries Revenue (soft-capped helpers when Realism loaded)
+  const yearNow=G.year||(1969+(G.yr||1));
+  let ancStreaming=0;
+  if(yearNow>=2008&&G.upgrades.find(u=>u.id==='streaming'&&u.owned)&&G.released&&G.released.length){
+    ancStreaming=window.Realism?.streamingResidual?Realism.streamingResidual(G):(G.released.length*150000);
+  }
+  let ancHome=0;
+  if(yearNow>=1980&&G.upgrades.find(u=>u.id==='homevideo'&&u.owned)&&G.released&&G.released.length){
+    if(window.Realism?.homeVideoResidual)ancHome=Realism.homeVideoResidual(G);
+    else{
+      G.released.forEach(f=>{
+        const age=(G.totalQ-(f.releasedQ||0));
+        const decay=Math.max(0.2,1-age*0.09);
+        let r=(f.budget||0)*0.045*(((f.quality||60)/100)+0.3);
+        if(f.classic)r*=1.6;
+        if(f.cult)r*=1.5;
+        ancHome+=r*decay;
+      });
+      ancHome=Math.round(ancHome);
+    }
+  }
+  const ancVal=Math.max(0,Math.round(ancStreaming+ancHome));
+  setText('off-anc-val',fmtM(ancVal));
+  setText('off-anc-qtr','Q'+G.q+' · '+yearNow+(yearNow<1980?' · HV locked':yearNow<2008?' · stream locked':''));
+
+  // Trends: prefer fog/meta when Realism is loaded
+  if(window.Realism&&typeof window.updateTrendsFog==='function'){
+    window.updateTrendsFog();
+  } else {
+    const total=(G.released&&G.released.length)?G.released.length:0;
+    let topGenrePct=0,topThemePct=0;
+    if(total){
+      const gC={},tC={};
+      G.released.forEach(f=>{
+        gC[f.genre]=(gC[f.genre]||0)+1;
+        tC[f.theme]=(tC[f.theme]||0)+1;
+      });
+      const topG=Math.max(...Object.values(gC));
+      const topT=Math.max(...Object.values(tC));
+      topGenrePct=Math.round(topG/total*100);
+      topThemePct=Math.round(topT/total*100);
+    }
+    setText('off-trend-genres-pct',topGenrePct+'%');
+    setText('off-trend-themes-pct',topThemePct+'%');
+    setWidth('off-trend-genres-bar',topGenrePct);
+    setWidth('off-trend-themes-bar',topThemePct);
+  }
+
+  const top=[...G.released].sort((a,b)=>b.gross-a.gross).slice(0,3);
+  const posterFrames=(T.office&&T.office.posterMeshes)||T.posterFrames||[];
+  posterFrames.forEach(function(pm,i){
+    const f=top[i];
+    const mat=pm.material;
+    if(f){
+      if(mat&&mat.color)mat.color.setHex(GENRE_3D[f.genre]||0x888880);
+      pm._film=f;
+    } else {
+      if(mat&&mat.color)mat.color.setHex(0x555550);
+      pm._film=null;
+    }
+  });
+
+  const strip=document.getElementById('off-strip');
+  if(!strip)return;
+  strip.innerHTML='';
+  AWARD_CATS.forEach(function(cat){
+    const won=G.awards.find(a=>a.cat===cat);
+    const d=document.createElement('div');
+    d.style.cssText='padding:4px 10px;border-radius:99px;font-size:11px;font-weight:500;border:0.5px solid '+(won?'#FAC775':'var(--color-border-tertiary)')+';background:'+(won?'#FAEEDA':'var(--color-background-secondary)')+';color:'+(won?'#412402':'var(--color-text-secondary)');
+    d.textContent=(won?'🏆 ':'')+cat+(won?' — '+won.film:'');
+    strip.appendChild(d);
+  });
+  top.forEach(function(f){
+    const d=document.createElement('div');
+    d.style.cssText='padding:4px 10px;border-radius:99px;font-size:11px;border:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);color:var(--color-text-secondary)';
+    d.textContent=GENRE_ICO[f.genre]+' '+f.title+' · '+fmtM(f.gross);
+    strip.appendChild(d);
+  });
+  if(!G.released.length){
+    const d=document.createElement('div');
+    d.style.cssText='padding:4px 10px;font-size:11px;color:var(--color-text-secondary)';
+    d.textContent='No films released yet — the poster wall will fill in as you release hits.';
+    strip.appendChild(d);
+  }
+}
+
+let _resizeT=null;
+function onResize3D(){
+  if(!window.three&&!three)return;
+  clearTimeout(_resizeT);
+  _resizeT=setTimeout(function(){const T=window.three||three;if(T)T.setSize();},60);
+}
+window.addEventListener('resize',onResize3D);
+
+document.addEventListener('keydown',function(e){
+  if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT'||e.target.tagName==='TEXTAREA')return;
+  if(document.getElementById('game-screen').classList.contains('hide'))return;
+  if(e.key==='Escape'){goHome();return;}
+  if(e.key==='e'||e.key==='E'){
+    const btn=document.getElementById('eqbtn');
+    if(btn&&!btn.disabled)endQuarter();
+  }
+  const tabs=['home','overview','develop','talent','studio','awards'];
+  const n=+e.key;
+  if(n>=1&&n<=6){
+    if(n===1)goHome();
+    else goTab(tabs[n-1]);
+  }
+});
+
+updateStartMeta();
+</script>
+<script type="module" src="./integrate.js"></script>
+<script>
+setTimeout(function(){
+  if(window.Realism)return;
+  var b=document.createElement('div');
+  b.id='module-load-banner';
+  b.style.cssText='position:fixed;inset:auto 12px 12px 12px;z-index:9999;padding:12px 14px;border-radius:10px;background:#3b1212;color:#fecaca;font:13px/1.4 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.45)';
+  b.innerHTML='Game modules failed to load. Open via a local server (not file://): <code>python3 -m http.server 8765</code> then visit <code>http://127.0.0.1:8765/executive_tycoon_3d_integrated.html</code>';
+  document.body.appendChild(b);
+},1200);
+</script>
+</body>
+</html>

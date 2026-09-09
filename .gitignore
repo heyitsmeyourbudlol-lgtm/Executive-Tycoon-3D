@@ -1,0 +1,24 @@
+# deps / build
+node_modules/
+dist/
+*.local
+
+# logs
+logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# local / secrets
+.env
+.env.*
+automation.config.local.json
+__pycache__/
+secrets/
+credentials.json
+*.pem

@@ -1,0 +1,8 @@
+{
+  "name": "executive-tycoon-3d",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:smoke": "node tests/smoke-realism.mjs"
+  }
+}
